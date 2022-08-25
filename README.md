@@ -5,7 +5,14 @@
 Requires `Out-ConsoleGridView` from [PowerShell/GraphicalTools](https://github.com/PowerShell/GraphicalTools). 
 
 1. Install `GraphicalTools` by typing the command `Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools`
-2. Run the `F7History.ps1` script (optionally, run from `$profile` so it's always ready).
+2. Include the `F7History.ps1` script in your $profile:
+
+```powershell
+
+# Include (don't RUN) the script by prefixing it with `. `.
+. ~/source/F7History/F7History.ps1
+
+```
 
 ## Usage 
 
