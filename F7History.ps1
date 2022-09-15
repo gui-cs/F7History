@@ -11,7 +11,7 @@
 #
 # Run this script from your Powershell Profile
 #
-# See https://gist.github.com/tig/cbbeab7f53efd73e329afd6d4b838191
+# See https://github.com/gui-cs/F7History
 # 
 function ocgv_history {
   param(
