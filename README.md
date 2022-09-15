@@ -4,7 +4,7 @@
 
 Requires `Out-ConsoleGridView` from [PowerShell/GraphicalTools](https://github.com/PowerShell/GraphicalTools). 
 
-1. Install `GraphicalTools` by typing the command `Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools`
+1. Install `ConsoleGuiTools` by typing the command `Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools`
 2. Include the `F7History.ps1` script in your $profile:
 
 ```powershell
@@ -25,3 +25,7 @@ Whatever is selected within `Out-ConsoleGridView` will be inserted on the comman
 Whatever was typed on the command line prior to hitting `F7` or `Shift-F7` will be used as a filter for `ocgv`.
 
 ![https://i.imgur.com/PMdhxPY.gif](https://i.imgur.com/EFYuNvB.gif)
+
+## More info
+
+This script utilizes [PSReadLine](https://github.com/PowerShell/PSReadLine)
