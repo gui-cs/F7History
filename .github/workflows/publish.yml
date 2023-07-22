@@ -12,16 +12,22 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
+      - name: Publish to PSGallery
+      uses: aammirmirza/Publish2PSGallery@PSGallery_v2
+      with:
+        NuGetApiKey: ${{ secrets.F7HISTORY_GALLERY_KEY }}
+        modulePath: ./F7History
+
       # - name: Setup PowerShell
       #   uses: actions/setup-powershell@v1
       #   with:
       #     version: '7.x'
 
-      - name: Publish Module to PowerShell Gallery
-        uses: pcgeek86/publish-powershell-module-action@v20
-        id: publish-module
-        with:
-          NuGetApiKey: ${{ secrets.F7HISTORY_GALLERY_KEY }}
+      # - name: Publish Module to PowerShell Gallery
+      #   uses: pcgeek86/publish-powershell-module-action@v20
+      #   id: publish-module
+      #   with:
+      #     NuGetApiKey: ${{ secrets.F7HISTORY_GALLERY_KEY }}
 
       # - name: Publish Module to PowerShell Gallery
       #   run: |
