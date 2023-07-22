@@ -8,15 +8,23 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
+    # steps:
+    #   - name: Check out code
+    #     uses: actions/checkout@v2
 
-      - name: Publish to PSGallery
-        uses: aammirmirza/Publish2PSGallery@PSGallery_v2
+    steps:
+      - name: Publish PowerShell
+        uses: natescherer/publish-powershell-action@v1.0.3
         with:
-          NuGetApiKey: ${{ secrets.F7HISTORY_GALLERY_KEY }}
-          modulePath: ./F7History
+          token: ${{ secrets.F7HISTORY_GALLERY_KEY }}
+          target: gallery
+          path: F7History
+
+      # - name: Publish to PSGallery
+      #   uses: aammirmirza/Publish2PSGallery@PSGallery_v2
+      #   with:
+      #     NuGetApiKey: ${{ secrets.F7HISTORY_GALLERY_KEY }}
+      #     modulePath: ./F7History
 
       # - name: Setup PowerShell
       #   uses: actions/setup-powershell@v1
