@@ -1,22 +1,23 @@
-## Use F7 as "Show Command History" in Powershell
+## F7History - Use F7 as a graphical "Show Command History" in PowerShell
 
 ## Setup
 
-Requires `Out-ConsoleGridView` from [PowerShell/GraphicalTools](https://github.com/PowerShell/GraphicalTools). 
+1. Install `F7History` from the [PowerShell Gallery](https://www.powershellgallery.com/packages/F7History/).
 
-1. Install `ConsoleGuiTools` by typing the command `Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools`
-2. Include the `F7History.ps1` script in your $profile:
-
-```powershell
-
-# Include (don't RUN) the script by prefixing it with `. `.
-. ~/source/F7History/F7History.ps1
-
+```ps1
+Install-Module -Name OcgvHistory
 ```
+
+2. Import `F7History` in your PowerShell `$profile`:
+
+```ps1
+Import-Module F7History
+```
+
 
 ## Usage 
 
-Press `F7` to see the history for the current PowerShell instance
+Press `F7` to see the history for the current PowerShell instance.
 
 Press `Shift-F7` to see the history for all PowerShell instances.
 
@@ -29,3 +30,11 @@ Whatever was typed on the command line prior to hitting `F7` or `Shift-F7` will 
 ## More info
 
 This script utilizes [PSReadLine](https://github.com/PowerShell/PSReadLine)
+
+## Building and Deploying
+
+### Publishing to PowerShell Gallery:
+
+```ps1
+Publish-Module -Path . -NuGetApiKey <F7HISTORY_GALLERY_KEY>
+```
