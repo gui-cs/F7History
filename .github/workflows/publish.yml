@@ -91,5 +91,5 @@ jobs:
         run: |
           Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
           Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
-          Publish-Module -Path ${{github.workspace}}/output -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
+          Publish-Module -Path ${{github.workspace}}/Modules -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
 
