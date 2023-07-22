@@ -80,19 +80,14 @@ jobs:
       with:
         name: Pester Results
         path: ${{github.workspace}}/*.xml
-
-
   publish:
+    needs: build
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-
       - name: Publish Module to PowerShell Gallery
         shell: pwsh
         run: |
           Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
           Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
-          Publish-Module -Path ./Source/ -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
+          Publish-Module -Path ${{github.workspace}}/output -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
 
