@@ -18,7 +18,7 @@ jobs:
         with:
           token: ${{ secrets.F7HISTORY_GALLERY_KEY }}
           target: gallery
-          path: F7History
+          path: src
 
       # - name: Publish to PSGallery
       #   uses: aammirmirza/Publish2PSGallery@PSGallery_v2
