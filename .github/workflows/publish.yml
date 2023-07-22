@@ -13,10 +13,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Publish to PSGallery
-      uses: aammirmirza/Publish2PSGallery@PSGallery_v2
-      with:
-        NuGetApiKey: ${{ secrets.F7HISTORY_GALLERY_KEY }}
-        modulePath: ./F7History
+        uses: aammirmirza/Publish2PSGallery@PSGallery_v2
+        with:
+          NuGetApiKey: ${{ secrets.F7HISTORY_GALLERY_KEY }}
+          modulePath: ./F7History
 
       # - name: Setup PowerShell
       #   uses: actions/setup-powershell@v1
