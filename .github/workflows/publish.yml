@@ -94,5 +94,5 @@ jobs:
         run: |
           Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
           Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
-          Publish-Module -Path ./F7History/ -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
+          Publish-Module -Path ./Source/ -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
 
