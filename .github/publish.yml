@@ -1,0 +1,23 @@
+name: Publish to PowerShell Gallery
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup PowerShell
+        uses: actions/setup-powershell@v1
+        with:
+          version: '7.x'
+
+      - name: Publish Module to PowerShell Gallery
+        run: |
+          Import-Module ./F7History.psd1
+          Publish-Module -Path . -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
