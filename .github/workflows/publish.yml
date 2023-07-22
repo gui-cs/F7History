@@ -15,12 +15,25 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-      - name: Publish PowerShell
-        uses: natescherer/publish-powershell-action@v1.0.3
-        with:
-          token: ${{ secrets.F7HISTORY_GALLERY_KEY }}
-          target: gallery
-          path: src
+
+      # - name: Setup PowerShell
+      #   uses: actions/setup-powershell@v1
+      #   with:
+      #     version: '7.x'
+
+      - name: Publish Module to PowerShell Gallery
+        run: |
+          Publish-Module -Path src -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
+          shell: pwsh
+#          # Import-Module src/F7History.psd1
+#          Publish-Module -Path src -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
+
+      # - name: Publish PowerShell
+      #   uses: natescherer/publish-powershell-action@v1.0.3
+      #   with:
+      #     token: ${{ secrets.F7HISTORY_GALLERY_KEY }}
+      #     target: gallery
+      #     path: src
 
       # - name: Publish to PSGallery
       #   uses: aammirmirza/Publish2PSGallery@PSGallery_v2
@@ -28,18 +41,10 @@ jobs:
       #     NuGetApiKey: ${{ secrets.F7HISTORY_GALLERY_KEY }}
       #     modulePath: ./F7History
 
-      # - name: Setup PowerShell
-      #   uses: actions/setup-powershell@v1
-      #   with:
-      #     version: '7.x'
-
       # - name: Publish Module to PowerShell Gallery
       #   uses: pcgeek86/publish-powershell-module-action@v20
       #   id: publish-module
       #   with:
       #     NuGetApiKey: ${{ secrets.F7HISTORY_GALLERY_KEY }}
 
-      # - name: Publish Module to PowerShell Gallery
-      #   run: |
-      #     Import-Module ./F7History.psd1
-      #     Publish-Module -Path . -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
+
