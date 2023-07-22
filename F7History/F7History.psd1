@@ -12,7 +12,7 @@
 RootModule = '.\F7History.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.6'
+ModuleVersion = '0.0.7'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -87,7 +87,7 @@ FunctionsToExport = 'f7_history'
 # ModuleList = @()
 
 # List of all files packaged with this module
-FileList = @(".\F7History.psd1"; ".\F7History.psm1"; ".\README.md")
+FileList = @(".\F7History.psd1"; ".\F7History.psm1")
 
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{
