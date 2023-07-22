@@ -22,9 +22,9 @@ jobs:
       #     version: '7.x'
 
       - name: Publish Module to PowerShell Gallery
+        shell: pwsh
         run: |
           Publish-Module -Path src -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
-          shell: pwsh
 #          # Import-Module src/F7History.psd1
 #          Publish-Module -Path src -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
 
