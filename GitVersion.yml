@@ -1,0 +1,19 @@
+mode: Mainline
+assembly-versioning-format: '{Major}.{Minor}.{Patch}.{env:BUILDCOUNT ?? 0}'
+assembly-informational-format: '{NuGetVersionV2}+Build.{env:BUILDCOUNT ?? 0}.Date.{CommitDate}.Branch.{env:SAFEBRANCHNAME ?? unknown}.Sha.{Sha}'
+major-version-bump-message: '\+?semver:\s?(breaking|major)'
+minor-version-bump-message: '\+?semver:\s?(feature|minor)'
+patch-version-bump-message: '\+?semver:\s?(fix|patch)'
+no-bump-message: '\+?semver:\s?(none|skip)'
+branches:
+  master:
+    increment: Patch
+  pull-request:
+    tag: rc
+    increment: Patch
+  feature:
+    increment: Patch
+    regex: .*?/
+    source-branches:
+    - main
+    - feature
