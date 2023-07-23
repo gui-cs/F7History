@@ -17,16 +17,16 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            Tags                       = @("Windows", "Mac", "Linux", "History", "ConsoleGuiTools", "TUI", "Out-ConsoleGridView", "ocgv", "Terminal.Gui", "gui.cs" )
+            Tags            = @("Windows", "Mac", "Linux", "History", "ConsoleGuiTools", "TUI", "Out-ConsoleGridView", "ocgv", "Terminal.Gui", "gui.cs" )
 
             # A URL to the license for this module.
-            LicenseUri                 = 'https://github.com/gui-cs/F7History/blob/main/LICENSE.md'
+            LicenseUri      = 'https://github.com/gui-cs/F7History/blob/main/LICENSE.md'
 
             # A URL to the main website for this project.
-            ProjectUri                 = 'https://github.com/gui-cs/F7History/'
+            ProjectUri      = 'https://github.com/gui-cs/F7History/'
 
             # A URL to an icon representing this module.
-            IconUri = 'https://gui-cs.github.io/Terminal.Gui/images/logo48.png'
+            IconUri         = 'https://gui-cs.github.io/Terminal.Gui/images/logo48.png'
 
             # ReleaseNotes of this module
             # ReleaseNotes = ''
@@ -76,7 +76,7 @@
     Copyright         = '(c) Kindel, LLC. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description       = 'Press F7 to get a graphical "Show Command History" in Powershell.'
+    Description       = 'Press F7 to get a graphical Command History in Powershell.'
 
     # Minimum version of the PowerShell engine required by this module
     # PowerShellVersion = ''

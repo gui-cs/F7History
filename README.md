@@ -39,7 +39,7 @@ When the `Command Line History` window is displayed:
 * Use `ENTER` to insert the selected item on the command line.
 * Use `ESC` to close the window without inserting anything on the command line.
 
-## More info
+## Dependencies
 
 This module is dependent on these modules which will automatically be installed if they are not already present:
 
