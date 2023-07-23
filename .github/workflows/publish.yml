@@ -89,13 +89,14 @@ jobs:
             Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
             Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
             Import-Module -Name ${{github.workspace}}/Modules/F7History/F7History.psm1 -Force -Scope CurrentUser
-  
-    - uses: PoshCode/Actions/pester@v1
+
+    - name: Run Pester Tests
+      uses: PoshCode/Actions/pester@v1
       with:
         codeCoveragePath: Modules/F7History
         moduleUnderTest: F7History
         additionalModulePaths: ${{github.workspace}}/Modules
-
+  
     - name: Publish Test Results
       uses: zyborg/dotnet-tests-report@v1
       with:

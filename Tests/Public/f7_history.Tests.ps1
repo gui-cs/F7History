@@ -1,4 +1,9 @@
 #requires -Module F7History
+
+BeforeAll {
+    Import-Module F7History
+}
+
 Describe "f7_history" {
     Context "The f7_history function" {
         $cmd = $null
