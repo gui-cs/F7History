@@ -101,12 +101,12 @@ jobs:
       - name: Install-RequiredModules
         uses: PoshCode/Actions/install-requiredmodules@v1
         with: 
-          requiredModules-path: ${{github.workspace}}/RequiredModules
+          requiredModules-path: ${{github.workspace}}/RequiredModules/RequiredModules.psd1
       - name: Publish Module to PowerShell Gallery
         shell: pwsh
         run: |
-          Publish-Module -Path ${{github.workspace}}/Modules/F7History/${{ steps.gitversion.outputs.LegacySemVerPadded }} -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
+              Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
+              Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
+              Publish-Module -Path ${{github.workspace}}/Modules/F7History/${{ steps.gitversion.outputs.LegacySemVerPadded }} -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
 
-    # Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
-    # Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
 
