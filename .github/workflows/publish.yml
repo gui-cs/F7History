@@ -83,7 +83,7 @@ jobs:
       with:
         codeCoveragePath: Modules/F7History
         moduleUnderTest: F7History
-        additionalModulePaths: ${{github.workspace}}/Modules
+        #additionalModulePaths: ${{github.workspace}}/Modules
 
     - name: Publish Test Results
       uses: zyborg/dotnet-tests-report@v1
@@ -113,6 +113,6 @@ jobs:
         run: |
               Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
               Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
-              Publish-Module -Path ${{github.workspace}}/Modules/F7History/${{ steps.gitversion.outputs.LegacySemVerPadded }} -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
+              Publish-Module -Path ${{github.workspace}}/Modules/F7History -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
 
 
