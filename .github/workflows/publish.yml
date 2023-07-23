@@ -101,7 +101,7 @@ jobs:
       - name: Install-RequiredModules
         uses: PoshCode/Actions/install-requiredmodules@v1
         with: 
-          requiredModules-path: /home/runner/work/F7History/F7History/RequiredModules/RequiredModules.psd1
+          requiredModules-path: ${{github.workspace}}/RequiredModules
       - name: Publish Module to PowerShell Gallery
         shell: pwsh
         run: |
