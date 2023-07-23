@@ -7,7 +7,7 @@ function f7_history {
     [Boolean]
     $global
   )
- 
+
   $line = $null
   $cursor = $null
   [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
