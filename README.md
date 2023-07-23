@@ -9,13 +9,13 @@ A PowerShell module that provides a graphical "Show Command History" using `F7` 
 Install `F7History` from the [PowerShell Gallery](https://www.powershellgallery.com/packages/F7History/).
 
 ```ps1
-Install-Module F7History
+Install-Module -Name "F7History"
 ```
 
 Add a line to import `F7History` in your PowerShell `$profile`:
 
 ```ps1
-Import-Module F7History
+Import-Module -Name "F7History"
 ```
 
 ## Usage 
