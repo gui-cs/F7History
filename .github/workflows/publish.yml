@@ -1,9 +1,11 @@
+# We use `MainLine Development`. See https://gitversion.net/docs/reference/modes/mainline
+
 name: Publish to PowerShell Gallery
 
 on:
   push:
-    tags: 
-      - v*
+    branches: 
+      - main
 
 jobs:
   build:
@@ -61,7 +63,7 @@ jobs:
     - name: Invoke-ScriptAnalyzer
       uses: devblackops/github-action-psscriptanalyzer@master
       with:
-        rootPath: Modules/ModuleBuilder
+        rootPath: ${{github.workspace}}/Modules/F7History
         repoToken: ${{ secrets.GITHUB_TOKEN }}
 
   test:
@@ -77,8 +79,8 @@ jobs:
     - uses: PoshCode/Actions/install-requiredmodules@v1
     - uses: PoshCode/Actions/pester@v1
       with:
-        codeCoveragePath: Modules/ModuleBuilder
-        moduleUnderTest: ModuleBuilder
+        codeCoveragePath: Modules/F7History
+        moduleUnderTest: F7History
         additionalModulePaths: ${{github.workspace}}/Modules
     - name: Publish Test Results
       uses: zyborg/dotnet-tests-report@v1

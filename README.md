@@ -44,23 +44,11 @@ This module is dependent on these modules which will automatically be installed 
 
 The module is published to the PowerShell Gallery using GitHub Actions. See the publish.yml GitHub Action for details.
 
-To push a new version to the PowerShell Gallery:
+We use `MainLine Development`. See https://gitversion.net/docs/reference/modes/mainline
 
-Create a tag with the new version number
+### To push a new version to the PowerShell Gallery:
 
-```pwsh
-git tag -a -m "Release v1.2.3" v1.2.3`
-```
+Merge your changes to the `main` branch, or push directly to `main`. The GitHub Action will build and publish the module to the PowerShell Gallery here: https://www.powershellgallery.com/packages/F7History
 
-Ensure there's a commit to push to GitHub, then add/commit:
+To increment the minor version ensure the merge message includes "+semver: minor". To increment the major version ensure the merge message includes "+semver: major". See https://gitversion.net/docs/reference/version-increments
 
-```pwsh
-git add . ; git commit -m "Release v1.0.3"
-```
-
-Push the tag to the `main` branch
-```pwsh
-git push --atomic upstream main v1.0.2`
-```
-
-The GitHub Action will build and publish the module to the PowerShell Gallery here: https://www.powershellgallery.com/packages/F7History
