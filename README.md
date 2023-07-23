@@ -1,6 +1,6 @@
-## F7History - A graphical "Show Command History" in PowerShell
+## F7History - Graphical Command History for PowerShell
 
-A PowerShell module that provides a graphical "Show Command History" using `F7` and `Shift-F7`.
+A PowerShell module that provides a graphical Command History activated by the `F7` and `Shift-F7` keys.
 
 ![Demo](https://i.imgur.com/GvX7LEL.gif)
 
