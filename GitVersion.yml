@@ -6,7 +6,7 @@ minor-version-bump-message: '\+?semver:\s?(feature|minor)'
 patch-version-bump-message: '\+?semver:\s?(fix|patch)'
 no-bump-message: '\+?semver:\s?(none|skip)'
 branches:
-  master:
+  main:
     increment: Patch
   pull-request:
     tag: rc
@@ -16,4 +16,3 @@ branches:
     regex: .*?/
     source-branches:
     - main
-    - feature
