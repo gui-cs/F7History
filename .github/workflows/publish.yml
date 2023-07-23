@@ -24,22 +24,22 @@ jobs:
         version: ${{ steps.gitversion.outputs.LegacySemVerPadded }}
         destination: ${{github.workspace}}/output
     - name: Upload Build Output
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Modules
         path: ${{github.workspace}}/output
     - name: Upload Tests
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: PesterTests
         path: ${{github.workspace}}/Tests
     - name: Upload RequiredModules.psd1
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: RequiredModules
         path: ${{github.workspace}}/RequiredModules.psd1
     - name: Upload PSScriptAnalyzerSettings.psd1
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ScriptAnalyzer
         path: ${{github.workspace}}/PSScriptAnalyzerSettings.psd1
@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Download Build Output
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
     - name: Invoke-ScriptAnalyzer
       uses: devblackops/github-action-psscriptanalyzer@master
       with:
@@ -64,7 +64,7 @@ jobs:
         os: [windows-latest, ubuntu-latest, macos-latest]
     steps:
     - name: Download Build Output
-      uses: actions/download-artifact@v2
+      uses: actions/download-artifact@v3
     - uses: PoshCode/Actions/install-requiredmodules@v1
     - uses: PoshCode/Actions/pester@v1
       with:
@@ -76,7 +76,7 @@ jobs:
       with:
         test_results_path: results.xml
     - name: Upload Results
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Pester Results
         path: ${{github.workspace}}/*.xml
@@ -85,7 +85,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Build Output
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
+      - name: Display structure of downloaded files
+        run: ls -R
       - name: Publish Module to PowerShell Gallery
         shell: pwsh
         run: |

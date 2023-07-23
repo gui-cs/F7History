@@ -4,6 +4,6 @@
     ModuleManifest  = "F7History.psd1"
     # Subsequent relative paths are to the ModuleManifest
     OutputDirectory = "../"
-    VersionedOutputDirectory = $true
+    VersionedOutputDirectory = $false
     CopyDirectories = @('en-US')
 }
