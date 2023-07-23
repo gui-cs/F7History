@@ -88,6 +88,7 @@ jobs:
       run: |
             Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
             Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
+            Install-Module -Name Pester -RequiredVersion "4.10.1"  -Force -SkipPublisherCheck -Scope CurrentUser
 
     - name: Run Pester Tests
       uses: PoshCode/Actions/pester@v1
