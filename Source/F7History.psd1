@@ -50,10 +50,9 @@ RootModule = '.\F7History.psm1'
 # Modules that must be imported into the global environment prior to importing this module
 RequiredModules = @('Microsoft.PowerShell.ConsoleGuiTools', 'PSReadLine')
 
-    # Always define FunctionsToExport as an empty @() which will be replaced on build
-    FunctionsToExport      = @()
-    AliasesToExport        = @()
-
+# Always define FunctionsToExport as an empty @() which will be replaced on build
+FunctionsToExport      = @()
+AliasesToExport        = @()
     
 # List of all files packaged with this module
 #FileList = @(".\F7History.psd1"; ".\F7History.psm1")
