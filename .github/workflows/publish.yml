@@ -82,6 +82,7 @@ jobs:
       with: 
         requiredModules-path: ${{github.workspace}}/RequiredModules/RequiredModules.psd1
 
+    # see https://github.com/Jaykul/RequiredModules/issues/6
     - name: Manually Install Modules F7History is dependent on
       shell: pwsh
       run: |
@@ -122,6 +123,7 @@ jobs:
         with: 
           requiredModules-path: ${{github.workspace}}/RequiredModules/RequiredModules.psd1
 
+      # see https://github.com/Jaykul/RequiredModules/issues/6
       - name: Manually Install Modules F7History is dependent on
         shell: pwsh
         run: |

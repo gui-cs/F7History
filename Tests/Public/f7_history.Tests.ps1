@@ -1,5 +1,18 @@
 #requires -Module F7History
 Describe "f7_history" {
+    Context "The f7_history function" {
+        $cmd = $null
+        try {
+            $cmd = get-item -path Function:\f7_history
+
+        } catch {
+            $cmd = $null
+        }
+        
+        It "is defined" {
+            $cmd | Should -Be "f7_history"
+        }
+    }
     Context "Parameter Binding" {
         $parameters = (Get-Command f7_history).Parameters
         It "has a required string parameter for the global flag" {
