@@ -1,6 +1,5 @@
-#requires -Module F7History
-
 BeforeAll {
+    Write-Host "BeforeAll - Importing F7History"
     Import-Module F7History
 }
 
