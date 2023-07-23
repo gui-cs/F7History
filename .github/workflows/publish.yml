@@ -88,6 +88,7 @@ jobs:
       run: |
             Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
             Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
+            Import-Module -Name F7History
   
     - uses: PoshCode/Actions/pester@v1
       with:

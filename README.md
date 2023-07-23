@@ -1,6 +1,8 @@
-## F7History - Use F7 as a graphical "Show Command History" in PowerShell
+## F7History - A graphical "Show Command History" in PowerShell
 
 A PowerShell module that provides a graphical "Show Command History" using `F7` and `Shift-F7`.
+
+![Demo](https://i.imgur.com/GvX7LEL.gif)
 
 ## Setup
 
@@ -30,8 +32,6 @@ When the `Command Line History` window is displayed:
 * Use the arrow keys or mouse to select an item.
 * Use `ENTER` to insert the selected item on the command line.
 * Use `ESC` to close the window without inserting anything on the command line.
-
-![https://i.imgur.com/PMdhxPY.gif](https://i.imgur.com/EFYuNvB.gif)
 
 ## More info
 
