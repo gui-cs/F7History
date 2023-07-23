@@ -1,6 +1,6 @@
 ################################################################################
 # f7_history -Global $true | $false
-# 
+#
 function f7_history {
   param(
     [parameter(Mandatory = $true)]
@@ -23,7 +23,7 @@ function f7_history {
     $history = Get-History | Sort-Object -Descending -Property Id -Unique | Select-Object CommandLine -ExpandProperty CommandLine
     $selection = $history | Out-ConsoleGridView -OutputMode Single -Filter $line -Title "Command Line History"
   }
-  
+
   if ($selection) {
     [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
     [Microsoft.PowerShell.PSConsoleReadLine]::Insert($selection)
@@ -42,11 +42,11 @@ $parameters = @{
   BriefDescription = 'Show Matching History'
   LongDescription  = 'Show Matching History using Out-ConsoleGridView'
   ScriptBlock      = {
-    f7_history -Global $false 
+    f7_history -Global $false
   }
 }
 Set-PSReadLineKeyHandler @parameters
-  
+
 # When Shift-F7 is pressed, show the local command line history in OCGV
 $parameters = @{
   Key              = 'Shift-F7'
