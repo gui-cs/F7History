@@ -111,10 +111,10 @@ jobs:
         uses: actions/download-artifact@v3
       - name: Display structure of downloaded files
         run: ls -R
-      - name: Install-RequiredModules
-        uses: PoshCode/Actions/install-requiredmodules@v1
-        with: 
-          requiredModules-path: ${{github.workspace}}/RequiredModules/RequiredModules.psd1
+      # - name: Install-RequiredModules
+      #   uses: PoshCode/Actions/install-requiredmodules@v1
+      #   with: 
+      #     requiredModules-path: ${{github.workspace}}/RequiredModules/RequiredModules.psd1
       - name: Publish Module to PowerShell Gallery
         shell: pwsh
         run: |
