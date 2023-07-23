@@ -11,11 +11,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+
     - name: GitVersion
       id: gitversion
       uses: PoshCode/Actions/gitversion@v1
+
     - name: Install-RequiredModules
       uses: PoshCode/Actions/install-requiredmodules@v1
+
     - name: Build Module
       id: build
       uses: PoshCode/actions/build-module@v1
@@ -23,26 +26,31 @@ jobs:
         path: ${{github.workspace}}/Source
         version: ${{ steps.gitversion.outputs.LegacySemVerPadded }}
         destination: ${{github.workspace}}/output
+
     - name: Upload Build Output
       uses: actions/upload-artifact@v3
       with:
         name: Modules
         path: ${{github.workspace}}/output
+
     - name: Upload Tests
       uses: actions/upload-artifact@v3
       with:
         name: PesterTests
         path: ${{github.workspace}}/Tests
+
     - name: Upload RequiredModules.psd1
       uses: actions/upload-artifact@v3
       with:
         name: RequiredModules
         path: ${{github.workspace}}/RequiredModules.psd1
+
     - name: Upload PSScriptAnalyzerSettings.psd1
       uses: actions/upload-artifact@v3
       with:
         name: ScriptAnalyzer
         path: ${{github.workspace}}/PSScriptAnalyzerSettings.psd1
+
   lint:
     needs: build
     name: Run PSScriptAnalyzer
@@ -55,6 +63,7 @@ jobs:
       with:
         rootPath: Modules/ModuleBuilder
         repoToken: ${{ secrets.GITHUB_TOKEN }}
+
   test:
     needs: build
     runs-on: ${{ matrix.os }}
@@ -80,6 +89,7 @@ jobs:
       with:
         name: Pester Results
         path: ${{github.workspace}}/*.xml
+
   publish:
     needs: build
     runs-on: ubuntu-latest
@@ -88,10 +98,13 @@ jobs:
         uses: actions/download-artifact@v3
       - name: Display structure of downloaded files
         run: ls -R
+      - name: Install-RequiredModules
+        uses: PoshCode/Actions/install-requiredmodules@v1
       - name: Publish Module to PowerShell Gallery
         shell: pwsh
         run: |
-          Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
-          Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
           Publish-Module -Path ${{github.workspace}}/Modules/F7History/${{ steps.gitversion.outputs.LegacySemVerPadded }} -NuGetApiKey ${{ secrets.F7HISTORY_GALLERY_KEY }}
+
+    # Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
+    # Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
 
