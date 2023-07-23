@@ -4,13 +4,13 @@ A PowerShell module that provides a graphical "Show Command History" using `F7` 
 
 ## Setup
 
-1. Install `F7History` from the [PowerShell Gallery](https://www.powershellgallery.com/packages/F7History/).
+Install `F7History` from the [PowerShell Gallery](https://www.powershellgallery.com/packages/F7History/).
 
 ```ps1
 Install-Module F7History
 ```
 
-2. Add a line to import `F7History` in your PowerShell `$profile`:
+Add a line to import `F7History` in your PowerShell `$profile`:
 
 ```ps1
 Import-Module F7History
@@ -43,3 +43,24 @@ This module is dependent on these modules which will automatically be installed 
 ## Building and Deploying
 
 The module is published to the PowerShell Gallery using GitHub Actions. See the publish.yml GitHub Action for details.
+
+To push a new version to the PowerShell Gallery:
+
+Create a tag with the new version number
+
+```pwsh
+git tag -a -m "Release v1.2.3" v1.2.3`
+```
+
+Ensure there's a commit to push to GitHub, then add/commit:
+
+```pwsh
+git add . ; git commit -m "Release v1.0.3"
+```
+
+Push the tag to the `main` branch
+```pwsh
+git push --atomic upstream main v1.0.2`
+```
+
+The GitHub Action will build and publish the module to the PowerShell Gallery here: https://www.powershellgallery.com/packages/F7History
