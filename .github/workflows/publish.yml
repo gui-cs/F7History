@@ -83,7 +83,7 @@ jobs:
       with:
         codeCoveragePath: Modules/F7History
         moduleUnderTest: F7History
-        #additionalModulePaths: ${{github.workspace}}/Modules
+        additionalModulePaths: ${{github.workspace}}/Modules
 
     - name: Publish Test Results
       uses: zyborg/dotnet-tests-report@v1
