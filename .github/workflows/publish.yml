@@ -63,7 +63,7 @@ jobs:
     - name: Invoke-ScriptAnalyzer
       uses: devblackops/github-action-psscriptanalyzer@master
       with:
-        rootPath: ${{github.workspace}}/Modules/F7History
+        rootPath: Modules/F7History
         repoToken: ${{ secrets.GITHUB_TOKEN }}
 
   test:
