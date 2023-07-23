@@ -18,6 +18,12 @@ Add a line to import `F7History` in your PowerShell `$profile`:
 Import-Module -Name "F7History"
 ```
 
+To change the key bindings, use the `-ArgumentList` parameter when importing the module. For example, to use `F6` and `Shift-F6` instead of `F7` and `Shift-F7`:
+
+```ps1
+Import-Module -Name "F7History" -ArgumentList  @{Key = "F6"; AllKey = "Shift-F6"}
+```
+
 ## Usage 
 
 At the PowerShell command line:
@@ -41,6 +47,13 @@ This module is dependent on these modules which will automatically be installed 
 * [Out-ConsoleGridView](https://github.com/PowerShell/GraphicalTools)
 
 ## Building and Deploying
+
+To build:
+
+```ps1
+rm ./Output
+Build-Module
+``````
 
 The module is published to the PowerShell Gallery using GitHub Actions. See the publish.yml GitHub Action for details.
 
