@@ -104,7 +104,9 @@ jobs:
         path: ${{github.workspace}}/*.xml
 
   publish:
-    needs: build
+    needs: 
+      - build
+      - test 
     runs-on: ubuntu-latest
     steps:
       - name: Download Build Output
