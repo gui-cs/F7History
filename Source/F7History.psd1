@@ -54,7 +54,6 @@
     FunctionsToExport = @()
     AliasesToExport   = @()
 
-    
     # List of all files packaged with this module
     #FileList = @(".\F7History.psd1"; ".\F7History.psm1")
 
