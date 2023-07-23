@@ -2,6 +2,8 @@ name: Publish to PowerShell Gallery
 
 on:
   push:
+    tags: 
+      - v*
     branches:
       - main
 
