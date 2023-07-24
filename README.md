@@ -1,7 +1,12 @@
-## F7History - Graphical Command History for PowerShell
+![PowerShell Gallery Version (including pre-releases)](https://img.shields.io/powershellgallery/v/F7History)
+![PowerShell Gallery](https://img.shields.io/powershellgallery/dt/F7History)
+![PowerShell Gallery](https://img.shields.io/powershellgallery/p/F7History)
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+## F7History - Graphical Command History for PowerShell
 
 A PowerShell module that provides a graphical Command History activated by the `F7` and `Shift-F7` keys.
 
