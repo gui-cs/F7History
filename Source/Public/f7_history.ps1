@@ -15,7 +15,7 @@ function f7_history {
 
   if ($global) {
     # Global history
-    Write-Progress -Activity "Getting global command history" -PercentComplete 50 -CurrentOperation "Getting global command history"
+    Write-Progress -Activity "Getting global (PSReadLine) command history" -PercentComplete 50 -CurrentOperation "Getting global command history"
     $historyItems = [Microsoft.PowerShell.PSConsoleReadLine]::GetHistoryItems()
     [array]::Reverse($historyItems)
 
