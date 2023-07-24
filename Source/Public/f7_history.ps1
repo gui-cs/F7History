@@ -1,7 +1,6 @@
 ################################################################################
 #
 # f7_history -Global $true | $false
-#
 function f7_history {
   param(
     [parameter(Mandatory = $true)]
