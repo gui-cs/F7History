@@ -1,0 +1,28 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "tig",
+      "name": "Tig",
+      "avatar_url": "https://avatars.githubusercontent.com/u/585482?v=4",
+      "profile": "http://www.kindel.com",
+      "contributions": [
+        "maintenance",
+        "infra",
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "F7History",
+  "projectOwner": "gui-cs"
+}
