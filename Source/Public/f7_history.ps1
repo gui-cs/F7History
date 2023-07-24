@@ -3,7 +3,12 @@
 # f7_history -Global $true | $false
 #
 function f7_history {
-
+  param(
+    [parameter(Mandatory = $true)]
+    [Boolean]
+    $global
+  )
+  
   $line = $null
   $cursor = $null
   [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
@@ -27,7 +32,7 @@ function f7_history {
     }
 
     if ($null -eq $historyItems -or $historyItems.Count -eq 0) {
-      #Write-Host "The global (PSReadLine) history is empty."
+      Write-Error "The global (PSReadLine) history is empty."
       return
     }
 
