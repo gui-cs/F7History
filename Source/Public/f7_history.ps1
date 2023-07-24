@@ -28,11 +28,11 @@ function f7_history {
     } | ForEach-Object { 
       $startTime = if ($_.StartTime -ne $null -and $_.StartTime -ne [datetime]::MinValue) { $_.StartTime.ToLocalTime() } else { $null }
       [PSCustomObject]@{ 'CommandLine' = $_.CommandLine; 'When' = $startTime }
-    } 
+    }
 
-    if ($historyItems -eq $null -or $historyItems.Count -eq 0) {
-      Write-Host "The global (PSReadLine) history is empty."
-      return 
+    if ($null -eq $historyItems -or $historyItems.Count -eq 0) {
+      #Write-Host "The global (PSReadLine) history is empty."
+      return
     }
 
     $selection = $history | Out-ConsoleGridView -OutputMode Single -Filter $line -Title "Command History for All Powershell Instances"
@@ -42,9 +42,9 @@ function f7_history {
     # Local history
     $history = Get-History | Sort-Object -Descending -Property Id | Select-Object @{Name = 'CommandLine'; Expression = { $_.CommandLine } } -Unique
 
-    if ($history -eq $null -or $history.Count -eq 0) {
-      Write-Host "The PowerShell history is empty."
-      return 
+    if ($null -eq $history -or $history.Count -eq 0) {
+      #Write-Host "The PowerShell history is empty."
+      return
     }
 
     $selection = $history | Out-ConsoleGridView -OutputMode Single -Filter $line -Title "Command History"
