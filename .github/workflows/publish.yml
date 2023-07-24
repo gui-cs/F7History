@@ -8,7 +8,8 @@ on:
       - main
     paths-ignore:
        - '**.md'
-       
+       - '.all-contributorsrc'
+
 jobs:
   build:
     runs-on: windows-latest
