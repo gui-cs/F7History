@@ -8,13 +8,14 @@ function f7_history {
     [Boolean]
     $global
   )
-  
+
   $line = $null
   $cursor = $null
   [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
 
   if ($global) {
     # Global history
+    Write-Progress -Activity "Getting global command history" -PercentComplete 50 -CurrentOperation "Getting global command history"
     $historyItems = [Microsoft.PowerShell.PSConsoleReadLine]::GetHistoryItems()
     [array]::Reverse($historyItems)
 
@@ -31,8 +32,10 @@ function f7_history {
       [PSCustomObject]@{ 'CommandLine' = $_.CommandLine; 'When' = $startTime }
     }
 
+    Write-Progress -Completed
+
     if ($null -eq $historyItems -or $historyItems.Count -eq 0) {
-      Write-Error "The global (PSReadLine) history is empty."
+      Write-Information "The global (PSReadLine) history is empty." -InformationAction Continue
       return
     }
 
@@ -44,7 +47,7 @@ function f7_history {
     $history = Get-History | Sort-Object -Descending -Property Id | Select-Object @{Name = 'CommandLine'; Expression = { $_.CommandLine } } -Unique
 
     if ($null -eq $history -or $history.Count -eq 0) {
-      #Write-Host "The PowerShell history is empty."
+      Write-Information "The PowerShell history is empty." -InformationAction Continue
       return
     }
 
