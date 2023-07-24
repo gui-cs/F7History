@@ -17,10 +17,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: GitVersion
-      id: gitversion
-      uses: PoshCode/Actions/gitversion@v1
-
     - name: Install-RequiredModules
       uses: PoshCode/Actions/install-requiredmodules@v1
 
@@ -29,7 +25,6 @@ jobs:
       uses: PoshCode/actions/build-module@v1
       with:
         path: ${{github.workspace}}/Source
-        version: ${{ steps.gitversion.outputs.LegacySemVerPadded }}
         destination: ${{github.workspace}}/output
 
     - name: Upload Build Output
