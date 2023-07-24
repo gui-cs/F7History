@@ -68,9 +68,17 @@ We use `MainLine Development`. See https://gitversion.net/docs/reference/modes/m
 
 ### To push a new version to the PowerShell Gallery:
 
-Merge your changes to the `main` branch, or push directly to `main`. The GitHub Action will build and publish the module to the PowerShell Gallery here: https://www.powershellgallery.com/packages/F7History
+Merge changes to the `main` branch, or push directly to `main`. The GitHub Action will build and publish the module to the PowerShell Gallery here: https://www.powershellgallery.com/packages/F7History
 
 To increment the minor version ensure the merge message includes "+semver: minor". To increment the major version ensure the merge message includes "+semver: major". See https://gitversion.net/docs/reference/version-increments
+
+To force a version number:
+
+```ps1
+git tag v1.1.0 -a -m "Version 1.1.0"
+git add . ; git commit -m "Version 1.1.0"
+git push --atomic upstream main v1.1.0
+```
 
 
 ## Contributors ✨
