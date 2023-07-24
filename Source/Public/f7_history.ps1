@@ -21,8 +21,8 @@ function f7_history {
         return $true
       }
       return $false
-    } | ForEach-Object { 
-      $startTime = if ($_.StartTime -ne $null -and $_.StartTime -ne [datetime]::MinValue) { $_.StartTime.ToLocalTime() } else { $null }
+    } | ForEach-Object {
+      $startTime = if ($null -ne $_.StartTime -and $_.StartTime -ne [datetime]::MinValue) { $_.StartTime.ToLocalTime() } else { $null }
       [PSCustomObject]@{ 'CommandLine' = $_.CommandLine; 'When' = $startTime }
     }
 
