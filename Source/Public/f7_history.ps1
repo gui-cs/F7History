@@ -12,6 +12,8 @@ function f7_history {
   $cursor = $null
   [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
 
+  $title = "Command History"
+ 
   if ($global) {
     # Global history
     $historyItems = [Microsoft.PowerShell.PSConsoleReadLine]::GetHistoryItems()
@@ -34,9 +36,7 @@ function f7_history {
       Write-Host "The global (PSReadLine) history is empty."
       return 
     }
-
-    $selection = $history | Out-ConsoleGridView -OutputMode Single -Filter $line -Title "Command History for All Powershell Instances"
-
+    $title = $title + " for All PowerShell Instances"
   }
   else {
     # Local history
@@ -46,9 +46,9 @@ function f7_history {
       Write-Host "The PowerShell history is empty."
       return 
     }
-
-    $selection = $history | Out-ConsoleGridView -OutputMode Single -Filter $line -Title "Command History"
   }
+  
+  $selection = $history | Out-ConsoleGridView -OutputMode Single -Filter $Filter -Title $Title -Debug:$Debug
 
   if ($selection.Count -gt 0) {
     $selection = $selection.'CommandLine'
