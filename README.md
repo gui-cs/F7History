@@ -46,6 +46,18 @@ When the `Command Line History` window is displayed:
 * Use `ENTER` to insert the selected item on the command line.
 * Use `ESC` to close the window without inserting anything on the command line.
 
+## Advanced Usage
+
+### Forcing F7History to use NetDriver
+
+[Terminal.Gui](https://github.com/gui-cs/Terminal.Gui), upon which F7History is built, has an abstraction layer for OS and terminal platforms called `ConsoleDrivers`. By default, om Linux F7History uses the `CursesDriver` which is the default driver for Linux and macOS. On Windows, the default is `WindowsDriver`. There is a third ConsoleDriver called `NetDriver` which is a pure .NET implementation that works on all platforms (but is not as fast as the platform-specific drivers). 
+
+To force F7History to use `NetDriver`, set the `$UseNetDriver` variable to `$true` in your PowerShell session. When `$UseNetDriver` is set to `$true`, F7History will display `NetDriver` on the status bar.
+
+### Enabling Diagnostics Information
+
+To enable diagnostics information, set the `$EnableDiagnostics` variable to `$true` in your PowerShell session. This will cause F7History to display version information in the status bar.
+
 ## Dependencies
 
 This module is dependent on these modules which will automatically be installed if they are not already present:

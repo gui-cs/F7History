@@ -48,11 +48,12 @@ function f7_history {
     }
   }
   
-  $selection = $history | Out-ConsoleGridView -OutputMode Single -Filter $Filter -Title $Title -Debug:$Debug
+  $selection = $history | Out-ConsoleGridView -OutputMode Single -Filter $Filter -Title $Title -Debug:$EnableDiagnostics UseNetDriver:$UseNetDriver
+
+  [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
 
   if ($selection.Count -gt 0) {
     $selection = $selection.'CommandLine'
-    [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
     [Microsoft.PowerShell.PSConsoleReadLine]::Insert($selection)
     if ($selection.StartsWith($line)) {
       [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor)
