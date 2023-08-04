@@ -8,9 +8,6 @@ no-bump-message: '\+?semver:\s?(none|skip)'
 branches:
   main:
     increment: Patch
-  pull-request:
-    tag: rc
-    increment: Patch
   feature:
     increment: Patch
     regex: .*?/
