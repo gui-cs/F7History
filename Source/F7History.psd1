@@ -32,14 +32,13 @@
             # ReleaseNotes = ''
 
             # Prerelease string of this module
-            # Prerelease = ''
+            Prerelease = ''
 
             # Flag to indicate whether the module requires explicit user acceptance for install/update/save
             # RequireLicenseAcceptance = $false
 
             # External dependent modules of this module
-            #ExternalModuleDependencies = @('Microsoft.PowerShell.ConsoleGuiTools', 'PSReadLine')
-            ExternalModuleDependencies = @('..\..\GraphicalTools\module\Microsoft.PowerShell.ConsoleGuiToolsY\', 'PSReadLine')
+            ExternalModuleDependencies = @('Microsoft.PowerShell.ConsoleGuiTools', 'PSReadLine')
 
         } # End of PSData hashtable
 
@@ -49,8 +48,7 @@
     RootModule        = '.\F7History.psm1'
 
     # Modules that must be imported into the global environment prior to importing this module
-    # RequiredModules   = @('Microsoft.PowerShell.ConsoleGuiTools', 'PSReadLine')
-    RequiredModules   = @('..\..\GraphicalTools\module\Microsoft.PowerShell.ConsoleGuiToolsX\', 'PSReadLine')
+    RequiredModules   = @('Microsoft.PowerShell.ConsoleGuiTools', 'PSReadLine')
 
     # Always define FunctionsToExport as an empty @() which will be replaced on build
     FunctionsToExport = @()
