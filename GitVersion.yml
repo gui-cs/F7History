@@ -11,5 +11,6 @@ branches:
   feature:
     increment: Patch
     regex: .*?/
+    tag: 'feature'
     source-branches:
     - main
