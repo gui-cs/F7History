@@ -15,7 +15,7 @@ $PSDefaultParameterValues += @{}
 $PSDefaultParameterValues["Disabled"] = $true
 
 # Find a built module in the Output dir
-$FoundModule = Get-ChildItem .\Output\"$($ModuleName).psd1"
+$FoundModule = Get-ChildItem .\Output\"$($ModuleName)\$($ModuleName).psd1"
 
 if (!$FoundModule) {
     throw "Can't find $($ModuleName).psd1 in output dir. Did you build the module?"

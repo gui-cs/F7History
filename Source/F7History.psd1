@@ -29,7 +29,7 @@
             IconUri         = 'https://gui-cs.github.io/Terminal.Gui/images/logo48.png'
 
             # ReleaseNotes of this module
-            # ReleaseNotes = ''
+            ReleaseNotes = ''
 
             # Prerelease string of this module
             Prerelease = ''
@@ -38,17 +38,27 @@
             # RequireLicenseAcceptance = $false
 
             # External dependent modules of this module
-            ExternalModuleDependencies = @('Microsoft.PowerShell.ConsoleGuiTools', 'PSReadLine')
+            ExternalModuleDependencies = @(
+                @{
+                    ModuleName = 'Microsoft.PowerShell.ConsoleGuiTools' ; RequiredVersion = '0.7.*'
+                }, 
+                'PSReadLine'
+            )
 
         } # End of PSData hashtable
 
-    } # End of PrivateData hashtable
+    } # End of PrivateData hashtableoc
 
     # Script module or binary module file associated with this manifest.
     RootModule        = '.\F7History.psm1'
 
     # Modules that must be imported into the global environment prior to importing this module
-    RequiredModules   = @('Microsoft.PowerShell.ConsoleGuiTools', 'PSReadLine')
+    RequiredModules   = @(
+        @{
+            ModuleName = 'Microsoft.PowerShell.ConsoleGuiTools' ; RequiredVersion = '0.7.5'
+        }, 
+        'PSReadLine'
+    )
 
     # Always define FunctionsToExport as an empty @() which will be replaced on build
     FunctionsToExport = @()

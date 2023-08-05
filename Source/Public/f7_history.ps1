@@ -1,11 +1,17 @@
 ################################################################################
-# f7_history -Global $true | $false
-#
+# f7_history -Global $true | $false -Diagnostic -UseNetDriver
+################################################################################
 function f7_history {
   param(
     [parameter(Mandatory = $true)]
     [Boolean]
-    $global
+    $global,
+    [parameter(Mandatory = $false)]
+    [System.Management.Automation.SwitchParameter]
+    $Diagnostic,
+    [parameter(Mandatory = $false)]
+    [System.Management.Automation.SwitchParameter]
+    $UseNetDriver
   )
 
   $line = $null
@@ -28,11 +34,11 @@ function f7_history {
       }
       return $false
     } | ForEach-Object { 
-      $startTime = if ($_.StartTime -ne $null -and $_.StartTime -ne [datetime]::MinValue) { $_.StartTime.ToLocalTime() } else { $null }
+      $startTime = if ($null -ne $_.StartTime  -and $_.StartTime -ne [datetime]::MinValue) { $_.StartTime.ToLocalTime() } else { $null }
       [PSCustomObject]@{ 'CommandLine' = $_.CommandLine; 'When' = $startTime }
     } 
 
-    if ($historyItems -eq $null -or $historyItems.Count -eq 0) {
+    if ($null -eq $historyItems -or $historyItems.Count -eq 0) {
       Write-Host "The global (PSReadLine) history is empty."
       return 
     }
@@ -42,14 +48,23 @@ function f7_history {
     # Local history
     $history = Get-History | Sort-Object -Descending -Property Id | Select-Object @{Name = 'CommandLine'; Expression = { $_.CommandLine } } -Unique
 
-    if ($history -eq $null -or $history.Count -eq 0) {
+    if ($null -eq $history -or $history.Count -eq 0) {
       Write-Host "The PowerShell history is empty."
       return 
     }
   }
   
-  $selection = $history | Out-ConsoleGridView -OutputMode Single -Filter $Filter -Title $Title -Debug:$EnableDiagnostics UseNetDriver:$UseNetDriver
+  # Invoke OCGV to show the history
+  $params = @{
+    OutputMode = "Single"
+    Title      = $Title
+  }
+ 
+  if ($Diagnostic.IsPresent) { $params["Debug"] = $true }
+  if ($UseNetDriver.IsPresent) { $params["UseNetDriver"] = $true }
+  $selection = $history | Out-ConsoleGridView @params
 
+  # Delete the current line and insert the selected line
   [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
 
   if ($selection.Count -gt 0) {
@@ -64,38 +79,32 @@ function f7_history {
   }
 }
 
-if ($args.Count -eq 0 -or $null -eq $args[0]["Key"]) {
-  $key = "F7"
-}
-else {
-  $key = $args[0]["Key"]
-}
+# Set the PSReadLine key handlers for F7 and Shift-F7
 
 # When F7 is pressed, show the local command line history in OCGV
 $parameters = @{
-  Chord             = $key
+  Chord            = if ($args.Count -eq 0 -or $null -eq $args[0]["Key"]) { "F7" } else { $args[0]["Key"] }
   BriefDescription = 'Show Matching Command History'
-  Description  = 'Show Matching Command History using Out-ConsoleGridView'
+  Description      = 'Show Matching Command History using Out-ConsoleGridView'
   ScriptBlock      = {
-    f7_history -Global $false
+    $params = @{ Global = $false }
+    if ($F7Diagnostic) { $params["Diagnostic"] = $true }
+    if ($F7UseNetDriver) { $params["UseNetDriver"] = $true }
+    f7_history @params
   }
 }
 Set-PSReadLineKeyHandler @parameters
 
-if ($args.Count -eq 0 -or $null -eq $args[0]["AllKey"]) {
-  $allkey = "Shift-F7"
-}
-else {
-  $allkey = $args[0]["AllKey"]
-}
-
-# When Shift-F7 is pressed, show the local command line history in OCGV
+# When Shift-F7 is pressed, show the global command line history in OCGV
 $parameters = @{
-  Chord              = $allkey
+  Chord            = if ($args.Count -eq 0 -or $null -eq $args[0]["AllKey"]) { "Shift-F7" } else { $args[0]["AllKey"] }
   BriefDescription = 'Show Matching Command History for All'
-  Description  = 'Show Matching Command History for all PowerShell instances using Out-ConsoleGridView'
+  Description      = 'Show Matching Command History for all PowerShell instances using Out-ConsoleGridView'
   ScriptBlock      = {
-    f7_history -Global $true
+    $params = @{ Global = $true }
+    if ($F7Diagnostic) { $params["Diagnostic"] = $true }
+    if ($F7UseNetDriver) { $params["UseNetDriver"] = $true }
+    f7_history @params
   }
 }
 Set-PSReadLineKeyHandler @parameters
