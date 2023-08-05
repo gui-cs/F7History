@@ -54,7 +54,7 @@ function f7_history {
       return
     }
   }
-  
+
   # Invoke OCGV to show the history
   $params = @{
     OutputMode = "Single"
