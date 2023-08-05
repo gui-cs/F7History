@@ -55,7 +55,7 @@
     # Modules that must be imported into the global environment prior to importing this module
     RequiredModules   = @(
         @{
-            ModuleName = 'Microsoft.PowerShell.ConsoleGuiTools' ; RequiredVersion = '0.7.*'
+            ModuleName = 'Microsoft.PowerShell.ConsoleGuiTools' ; RequiredVersion = '0.7.4'
         },
         'PSReadLine'
     )
