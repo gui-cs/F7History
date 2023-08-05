@@ -41,7 +41,7 @@
             ExternalModuleDependencies = @(
                 @{
                     ModuleName = 'Microsoft.PowerShell.ConsoleGuiTools' ; RequiredVersion = '0.7.*'
-                }, 
+                },
                 'PSReadLine'
             )
 
@@ -56,7 +56,7 @@
     RequiredModules   = @(
         @{
             ModuleName = 'Microsoft.PowerShell.ConsoleGuiTools' ; RequiredVersion = '0.7.5'
-        }, 
+        },
         'PSReadLine'
     )
 

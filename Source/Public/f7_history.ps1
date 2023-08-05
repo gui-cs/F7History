@@ -19,7 +19,7 @@ function f7_history {
   [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
 
   $title = "Command History"
- 
+
   if ($global) {
     # Global history
     Write-Progress -Activity "Getting global (PSReadLine) command history" -PercentComplete -1
@@ -34,14 +34,14 @@ function f7_history {
         return $true
       }
       return $false
-    } | ForEach-Object { 
+    } | ForEach-Object {
       $startTime = if ($null -ne $_.StartTime  -and $_.StartTime -ne [datetime]::MinValue) { $_.StartTime.ToLocalTime() } else { $null }
       [PSCustomObject]@{ 'CommandLine' = $_.CommandLine; 'When' = $startTime }
     }
 
     if ($null -eq $historyItems -or $historyItems.Count -eq 0) {
-      Write-Host "The global (PSReadLine) history is empty."
-      return 
+      Write-Output "The global (PSReadLine) history is empty."
+      return
     }
     $title = $title + " for All PowerShell Instances"
   }
@@ -50,8 +50,8 @@ function f7_history {
     $history = Get-History | Sort-Object -Descending -Property Id | Select-Object @{Name = 'CommandLine'; Expression = { $_.CommandLine } } -Unique
 
     if ($null -eq $history -or $history.Count -eq 0) {
-      Write-Host "The PowerShell history is empty."
-      return 
+      Write-Output "The PowerShell history is empty."
+      return
     }
   }
   
@@ -60,7 +60,7 @@ function f7_history {
     OutputMode = "Single"
     Title      = $Title
   }
- 
+
   if ($Diagnostic.IsPresent) { $params["Debug"] = $true }
   if ($UseNetDriver.IsPresent) { $params["UseNetDriver"] = $true }
   $selection = $history | Out-ConsoleGridView @params
