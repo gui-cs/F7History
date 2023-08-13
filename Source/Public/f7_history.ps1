@@ -59,11 +59,16 @@ function f7_history {
   $params = @{
     OutputMode = "Single"
     Title      = $Title
+    Filter     = $line
   }
 
   if ($Diagnostic.IsPresent) { $params["Debug"] = $true }
   if ($UseNetDriver.IsPresent) { $params["UseNetDriver"] = $true }
   $selection = $history | Out-ConsoleGridView @params
+
+  if ($global) {
+    Write-Progress -Completed
+  }
 
   # Delete the current line and insert the selected line
   [Microsoft.PowerShell.PSConsoleReadLine]::DeleteLine()
