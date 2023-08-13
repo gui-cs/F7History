@@ -67,7 +67,7 @@ function f7_history {
   $selection = $history | Out-ConsoleGridView @params
 
   if ($global) {
-    Write-Progress -Completed
+    Write-Progress -Activity "Launching `Out-ConsoleGridView" -Completed
   }
 
   # Delete the current line and insert the selected line
