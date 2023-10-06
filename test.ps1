@@ -7,6 +7,8 @@ param(
     [switch]$HideSuccess,
     [switch]$IncludeVSCodeMarker
 )
+
+
 Push-Location $PSScriptRoot
 $ModuleName = "F7History"
 
@@ -16,6 +18,7 @@ $PSDefaultParameterValues["Disabled"] = $true
 
 # Find a built module in the Output dir
 $FoundModule = Get-ChildItem .\Output\"$($ModuleName)\$($ModuleName).psd1"
+Write-Host "Testing $FoundModule..."
 
 if (!$FoundModule) {
     throw "Can't find $($ModuleName).psd1 in output dir. Did you build the module?"

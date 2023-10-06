@@ -35,7 +35,11 @@
             # External dependent modules of this module
             ExternalModuleDependencies = @(
                 @{
+<<<<<<< HEAD
+                    ModuleName = 'Microsoft.PowerShell.ConsoleGuiTools' ; RequiredVersion = '0.7.4'
+=======
                     ModuleName = 'Microsoft.PowerShell.ConsoleGuiTools'; RequiredVersion = '0.7.4'
+>>>>>>> b27cdac913fceab8c8005f9f2ba3e6d8fe585ee2
                 },
                 'PSReadLine'
             )
