@@ -51,7 +51,7 @@ Description = 'Press F7 to get a graphical Command History in Powershell.'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-RequiredModules = @(@{ModuleName = 'PSReadline'; ModuleVersion = '2.0'; }, 
+RequiredModules = @(@{ModuleName = 'PSReadline'; ModuleVersion = '2.1'; }, 
                @{ModuleName = 'Microsoft.PowerShell.ConsoleGuiTools'; ModuleVersion = '0.7.6.0'; })
 
 # Assemblies that must be loaded prior to importing this module

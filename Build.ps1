@@ -42,7 +42,7 @@ $ocgvModule = "Microsoft.PowerShell.ConsoleGuiTools"
         "$ocgvModule v $ocgvVersion found in local repository; setting RequiredVersion in $PsdPath"
         Update-ModuleManifest -Path $PsdPath -RequiredModules @(
             @{
-                ModuleName = "PSReadline"; ModuleVersion = "2.0"
+                ModuleName = "PSReadline"; ModuleVersion = "2.1"
             },
             @{
                 ModuleName = $ocgvModule; RequiredVersion = $ocgvVersion
@@ -56,7 +56,7 @@ if ($null -eq $ocgvVersion) {
     "$ocgvModule v $ocgvVersion` found in PSGallery; setting ModuleVersion in $PsdPath"
     Update-ModuleManifest -Path $PsdPath -RequiredModules @(
         @{
-            ModuleName = "PSReadline"; ModuleVersion = "2.0"
+            ModuleName = "PSReadline"; ModuleVersion = "2.1"
         },
         @{
             ModuleName = $ocgvModule; ModuleVersion = $ocgvVersion
