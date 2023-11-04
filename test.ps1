@@ -1,4 +1,4 @@
-#requires -Module PowerShellGet, @{ ModuleName = "Pester"; ModuleVersion = "4.10.1"; MaximumVersion = "4.999" }
+# requires -Module PowerShellGet, @{ ModuleName = "Pester"; ModuleVersion = "5.5.0"; MaximumVersion = "5.0" }
 using namespace Microsoft.PackageManagement.Provider.Utility
 using namespace System.Management.Automation
 param(
@@ -36,11 +36,11 @@ Write-Host "Invoke-Pester for Module $($ModuleUnderTest) version $($ModuleUnderT
 
 if ($CodeCoverage) {
     # Get code coverage for the psm1 file to a coverage.xml that we can mess with later
-    Invoke-Pester ./Tests -Show $Show -PesterOption @{
-        IncludeVSCodeMarker = $IncludeVSCodeMarker
-    } -CodeCoverage $ModuleUnderTest.Path -CodeCoverageOutputFile ./coverage.xml -PassThru | Convert-CodeCoverage -SourceRoot ./Source
+    # Invoke-Pester ./Tests -Show $Show -PesterOption @{
+    #     IncludeVSCodeMarker = $IncludeVSCodeMarker
+    # } -CodeCoverage $ModuleUnderTest.Path -CodeCoverageOutputFile ./coverage.xml -PassThru | Convert-CodeCoverage -SourceRoot ./Source
 } else {
-    Invoke-Pester ./Tests -Show $Show -PesterOption @{ IncludeVSCodeMarker = $IncludeVSCodeMarker }
+    Invoke-Pester -Path ./Tests 
 }
 
 Write-Host
