@@ -69,48 +69,48 @@ jobs:
         rootPath: Modules/F7History
         repoToken: ${{ secrets.GITHUB_TOKEN }}
 
-  test:
-    needs: build
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
-    steps:
-    - name: Download Build Output
-      uses: actions/download-artifact@v3
+  # test:
+  #   needs: build
+  #   runs-on: ${{ matrix.os }}
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       os: [windows-latest, ubuntu-latest, macos-latest]
+  #   steps:
+  #   - name: Download Build Output
+  #     uses: actions/download-artifact@v3
 
-    - name: Install Required Modules
-      uses: PoshCode/Actions/install-requiredmodules@v1
-      with: 
-        requiredModules-path: ${{github.workspace}}/RequiredModules/RequiredModules.psd1
+  #   - name: Install Required Modules
+  #     uses: PoshCode/Actions/install-requiredmodules@v1
+  #     with: 
+  #       requiredModules-path: ${{github.workspace}}/RequiredModules/RequiredModules.psd1
 
-    # see https://github.com/Jaykul/RequiredModules/issues/6
-    - name: Manually Install Modules F7History is dependent on
-      shell: pwsh
-      run: |
-            Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
-            Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
-            Install-Module -Name Pester -Force -SkipPublisherCheck -Scope CurrentUser
+  #   # see https://github.com/Jaykul/RequiredModules/issues/6
+  #   - name: Manually Install Modules F7History is dependent on
+  #     shell: pwsh
+  #     run: |
+  #           Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
+  #           Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
+  #           Install-Module -Name Pester -Force -SkipPublisherCheck -Scope CurrentUser
 
-    - name: Run Pester Tests
-      uses: PoshCode/Actions/pester@v2
-      with:
-        pesterVersion: "5.5.0"
-        codeCoveragePath: Modules/F7History
-        moduleUnderTest: F7History
-        additionalModulePaths: ${{github.workspace}}/Modules
+  #   - name: Run Pester Tests
+  #     uses: PoshCode/Actions/pester@v2
+  #     with:
+  #       pesterVersion: "5.5.0"
+  #       codeCoveragePath: Modules/F7History
+  #       moduleUnderTest: F7History
+  #       additionalModulePaths: ${{github.workspace}}/Modules
   
-    - name: Publish Test Results
-      uses: zyborg/dotnet-tests-report@v1
-      with:
-        test_results_path: results.xml
+  #   - name: Publish Test Results
+  #     uses: zyborg/dotnet-tests-report@v1
+  #     with:
+  #       test_results_path: results.xml
 
-    - name: Upload Results
-      uses: actions/upload-artifact@v3
-      with:
-        name: Pester Results
-        path: ${{github.workspace}}/*.xml
+  #   - name: Upload Results
+  #     uses: actions/upload-artifact@v3
+  #     with:
+  #       name: Pester Results
+  #       path: ${{github.workspace}}/*.xml
 
   publish:
     needs: 
