@@ -91,12 +91,12 @@ jobs:
       run: |
             Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
             Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
-            Install-Module -Name Pester -RequiredVersion "4.10.1"  -Force -SkipPublisherCheck -Scope CurrentUser
+            Install-Module -Name Pester -RequiredVersion "5.5.0"  -Force -SkipPublisherCheck -Scope CurrentUser
 
     - name: Run Pester Tests
       uses: PoshCode/Actions/pester@v1
       with:
-        pesterVersion: "4.10.1"
+        pesterVersion: "5.6.0"
         codeCoveragePath: Modules/F7History
         moduleUnderTest: F7History
         additionalModulePaths: ${{github.workspace}}/Modules
