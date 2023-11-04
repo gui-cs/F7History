@@ -63,30 +63,6 @@ This module is dependent on these modules which will automatically be installed 
 * [PSReadLine](https://github.com/PowerShell/PSReadLine)
 * [Out-ConsoleGridView](https://github.com/PowerShell/GraphicalTools)
 
-## Building and Deploying
-
-To build locally:
-
-```ps1
-.\build.ps1
-```
-
-This will create the `./Output/F7History` folder containing the module, build the module, publish it to a local repository (`-Repository -local`), and import it into the current PowerShell session. To create the local repository, run this command:
-
-```ps1
-Register-PSRepository -Name local -SourceLocation "~/psrepo" -InstallationPolicy Trusted
-```
-
-### To manually push a new version to the PowerShell Gallery:
-
-We use `MainLine Development`. See https://gitversion.net/docs/reference/modes/mainline
-
-The module is published to the PowerShell Gallery using GitHub Actions. See the publish.yml GitHub Action for details.
-
-Merge changes to the `main` branch, or push directly to `main`. The GitHub Action will build and publish the module to the PowerShell Gallery here: https://www.powershellgallery.com/packages/F7History
-
-To increment the minor version ensure the merge message includes "+semver: minor". To increment the major version ensure the merge message includes "+semver: major". See https://gitversion.net/docs/reference/version-increments
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
