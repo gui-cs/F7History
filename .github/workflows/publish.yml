@@ -44,11 +44,11 @@ jobs:
         name: PesterTests
         path: ${{github.workspace}}/Tests
 
-    - name: Upload RequiredModules.psd1
-      uses: actions/upload-artifact@v3
-      with:
-        name: RequiredModules
-        path: ${{github.workspace}}/RequiredModules.psd1
+    # - name: Upload RequiredModules.psd1
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: RequiredModules
+    #     path: ${{github.workspace}}/RequiredModules.psd1
 
     - name: Upload PSScriptAnalyzerSettings.psd1
       uses: actions/upload-artifact@v3
@@ -97,7 +97,8 @@ jobs:
     - name: Run Pester Tests
       shell: pwsh
       run: |
-            Import-Module ${{github.workspace}}/Modules/F7History
+            Import-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose
+            Import-Module ${{github.workspace}}/Modules/F7History -Verbose
             $MyOptions = @{
             Run = @{ # Run configuration.
               PassThru = $true # Return result object after finishing the test run.
