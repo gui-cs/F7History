@@ -50,15 +50,15 @@ if ($localRepository) {
     if ($v -match "$ocgvModule.(.*?).nupkg") {
         $v = [Version]::new($Matches[1])
         $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build)"
-        "$ocgvModule v $ocgvVersion found in local repository; setting RequiredVersion in $PsdPath"
-        Update-ModuleManifest -Path $PsdPath -RequiredModules @(
-            @{
-                ModuleName = "PSReadline"; ModuleVersion = "2.1"
-            },
-            @{
-                ModuleName = $ocgvModule; RequiredVersion = $ocgvVersion
-            }
-        ) -ErrorAction Stop
+        "$ocgvModule v $ocgvVersion found in local repository; Updating RequiredVersion in $PsdPath"
+        # Update-ModuleManifest -Path $PsdPath -RequiredModules @(
+        #     @{
+        #         ModuleName = "PSReadline"; ModuleVersion = "2.1"
+        #     },
+        #     @{
+        #         ModuleName = $ocgvModule; RequiredVersion = $ocgvVersion
+        #     }
+        # ) -ErrorAction Stop
     } 
 } 
 
