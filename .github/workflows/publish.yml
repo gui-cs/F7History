@@ -19,24 +19,26 @@ jobs:
 
     - name: GitVersion
       id: gitversion
-      uses: PoshCode/Actions/gitversion@v1
-
-    - name: Install-RequiredModules
-      uses: PoshCode/Actions/install-requiredmodules@v1
-
+      uses: nmcc/actions-gitversion@v1
+      with:
+        path-to-gitversion: packages/GitVersion.CommandLine/tools/GitVersion.exe
+  
     - name: Build Module
       id: build
-      uses: PoshCode/actions/build-module@v1
-      with:
-        path: ${{github.workspace}}/Source
-        version: ${{ steps.gitversion.outputs.LegacySemVerPadded }}
-        destination: ${{github.workspace}}/output
+      shell: pwsh
+      run: |
+            ./build.ps1 -Version ${{ steps.gitversion.outputs.LegacySemVerPadded }}
+      # uses: PoshCode/actions/build-module@v1
+      # with:
+      #   path: ${{github.workspace}}/Source
+      #   version: ${{ steps.gitversion.outputs.LegacySemVerPadded }}
+      #   destination: ${{github.workspace}}/output
 
     - name: Upload Build Output
       uses: actions/upload-artifact@v3
       with:
         name: Modules
-        path: ${{github.workspace}}/output
+        path: ${{github.workspace}}/Output
 
     - name: Upload Tests
       uses: actions/upload-artifact@v3
@@ -84,8 +86,8 @@ jobs:
     # - name: Manually Install Modules F7History is dependent on
     #   shell: pwsh
     #   run: |
-    #         Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -MaximumVersion 0.7.4 -Force -SkipPublisherCheck -Scope CurrentUser -Verbose
-    #         Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser -Verbose
+    #         Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
+    #         Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
 
     - name: Run Pester Tests
       shell: pwsh

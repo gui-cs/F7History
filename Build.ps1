@@ -1,3 +1,8 @@
+param(
+    [parameter(Mandatory = $false)]
+    [String] 
+    $Version
+)
 
 $ModuleName = "F7History"
 $ModulePath = "./Output/${ModuleName}"
@@ -5,25 +10,30 @@ $ModulePath = "./Output/${ModuleName}"
 # Assume this is the first build
 $build = 0
 
-$psd1Content = Get-Content $($ModulePath + "/$($ModuleName).psd1") -Raw -ErrorAction SilentlyContinue
-if ($psd1Content) {
-    # Extract the ModuleVersion from the .psd1 content using regular expression
-    if ($psd1Content -match "ModuleVersion\s+=\s+'(.*?)'") {
-        $prevVersion = $Matches[1]
-        $prevVersionParts = $prevVersion -split '\.'
-        $build = [int]$prevVersionParts[3] + 1
-        $ModuleVersion = "{0}.{1}.{2}.{3}" -f $prevVersionParts[0], $prevVersionParts[1], $prevVersionParts[2], $build
-    } else {
-       throw "ModuleVersion not found in the old .psd1 file."
+if ($null -eq $Version -or "" -eq $Version) {
+    $psd1Content = Get-Content $($ModulePath + "/$($ModuleName).psd1") -Raw -ErrorAction SilentlyContinue
+    if ($psd1Content) {
+        # Extract the ModuleVersion from the .psd1 content using regular expression
+        if ($psd1Content -match "ModuleVersion\s+=\s+'(.*?)'") {
+            $prevVersion = $Matches[1]
+            $prevVersionParts = $prevVersion -split '\.'
+            $build = [int]$prevVersionParts[3] + 1
+            $Version = "{0}.{1}.{2}.{3}" -f $prevVersionParts[0], $prevVersionParts[1], $prevVersionParts[2], $build
+            "Extracted version number from $ModulePath/$ModuleName.psd1: $Version"
+        }
+        else {
+            throw "Version not found in $ModulePath/$ModuleName.psd1."
+        }
     }
-} else {
-    "No previous version found. Assuming this is the first build."
-    # Get the ModuleVersion using dotnet-gitversion
-    $prevVersion = dotnet-gitversion /showvariable MajorMinorPatch
-    $ModuleVersion = "$($prevVersion).$($build)"
+    else {
+        "No previous version found. Assuming this is the first build."
+        "Getting the Verison using dotnet-gitversion..."
+        $prevVersion = dotnet-gitversion /showvariable MajorMinorPatch
+        $Version = "$($prevVersion).$($build)"
+    }
 }
 
-"New ModuleVersion: $ModuleVersion"
+"Building Version: $Version"
 
 # Ensure we're using the correct version of ConsoleGuiTools
 # If there's a local repository, use the latest version from there and set the RequiredVersion in the .psd1 file
@@ -32,12 +42,12 @@ $PsdPath = "./Source/$($ModuleName).psd1"
 $ocgvModule = "Microsoft.PowerShell.ConsoleGuiTools"
 "Patching $PsdPath with correct $ocgvModule version"
 
- # Find new version of ConsoleGuiTools in 'local' repository
- $localRepository = Get-PSRepository | Where-Object { $_.Name -eq 'local' }
- if ($localRepository) {
-     $localRepositoryPath = $localRepository | Select-Object -ExpandProperty SourceLocation
-     $v = Get-ChildItem "${localRepositoryPath}/${ocgvModule}*.nupkg" | Select-Object -ExpandProperty Name | Sort-Object -Descending | Select-Object -First 1
-     if ($v -match "$ocgvModule.(.*?).nupkg") {
+# Find new version of ConsoleGuiTools in 'local' repository
+$localRepository = Get-PSRepository | Where-Object { $_.Name -eq 'local' }
+if ($localRepository) {
+    $localRepositoryPath = $localRepository | Select-Object -ExpandProperty SourceLocation
+    $v = Get-ChildItem "${localRepositoryPath}/${ocgvModule}*.nupkg" | Select-Object -ExpandProperty Name | Sort-Object -Descending | Select-Object -First 1
+    if ($v -match "$ocgvModule.(.*?).nupkg") {
         $v = [Version]::new($Matches[1])
         $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build)"
         "$ocgvModule v $ocgvVersion found in local repository; setting RequiredVersion in $PsdPath"
@@ -49,7 +59,7 @@ $ocgvModule = "Microsoft.PowerShell.ConsoleGuiTools"
                 ModuleName = $ocgvModule; RequiredVersion = $ocgvVersion
             }
         ) -ErrorAction Stop
-     } 
+    } 
 } 
 
 if ($null -eq $ocgvVersion) {
@@ -83,8 +93,8 @@ if ($localRepository) {
     Remove-Item "${localRepositoryPath}/${ModuleName}*.nupkg" -Recurse -Force -ErrorAction SilentlyContinue
 }
 
-"Building $ModuleName $ModuleVersion to $ModulePath"
-Build-Module -SemVer $ModuleVersion -OutputDirectory ".${ModulePath}" -SourcePath ./Source
+"Building $ModuleName $Version to $ModulePath"
+Build-Module -SemVer $Version -OutputDirectory ".${ModulePath}" -SourcePath ./Source -ErrorAction Stop
 
 if ($localRepository) {    
     "  Removing  $ModuleName"
