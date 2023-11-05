@@ -80,6 +80,12 @@ jobs:
     - name: Download Build Output
       uses: actions/download-artifact@v3
 
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0
+        dotnet-quality: 'ga'
+
     # see https://github.com/Jaykul/RequiredModules/issues/6
     - name: Manually Install Modules F7History is dependent on
       shell: pwsh
