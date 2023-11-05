@@ -51,14 +51,14 @@ if ($localRepository) {
         $v = [Version]::new($Matches[1])
         $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build)"
         "$ocgvModule v $ocgvVersion found in local repository; Updating RequiredVersion in $PsdPath"
-        # Update-ModuleManifest -Path $PsdPath -RequiredModules @(
-        #     @{
-        #         ModuleName = "PSReadline"; ModuleVersion = "2.1"
-        #     },
-        #     @{
-        #         ModuleName = $ocgvModule; RequiredVersion = $ocgvVersion
-        #     }
-        # ) -ErrorAction Stop
+        Update-ModuleManifest -Path $PsdPath -RequiredModules @(
+            @{
+                ModuleName = "PSReadline"; ModuleVersion = "2.1"
+            },
+            @{
+                ModuleName = $ocgvModule; RequiredVersion = $ocgvVersion
+            }
+        ) -ErrorAction Stop
     } 
 } 
 
@@ -67,15 +67,14 @@ if ($null -eq $ocgvVersion) {
     $v = [Version]::new($module)
     $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build)"
     "$ocgvModule v $ocgvVersion` found in PSGallery; Updating -RequiredModules in $PsdPath"
-    cat $PsdPath
-    Update-ModuleManifest -Path $PsdPath -RequiredModules @(
-        @{
-            ModuleName = "PSReadline"; ModuleVersion = "2.1"
-        },
-        @{
-            ModuleName = $ocgvModule; ModuleVersion = $ocgvVersion
-        }
-    )  -ErrorAction Stop
+    #  Update-ModuleManifest -Path $PsdPath -RequiredModules @(
+    #     @{
+    #         ModuleName = "PSReadline"; ModuleVersion = "2.1"
+    #     },
+    #     @{
+    #         ModuleName = $ocgvModule; ModuleVersion = $ocgvVersion
+    #     }
+    # )  -ErrorAction Stop
 } 
 
 $OldModule = Get-Module $ModuleName -ErrorAction SilentlyContinue
