@@ -80,17 +80,6 @@ jobs:
     - name: Download Build Output
       uses: actions/download-artifact@v3
 
-    - name: Setup dotnet
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 7.0
-        dotnet-quality: 'ga'
-
-    # - name: Install Required Modules
-    #   uses: PoshCode/Actions/install-requiredmodules@v1
-    #   with: 
-    #     requiredModules-path: ${{github.workspace}}/RequiredModules/RequiredModules.psd1
-
     # see https://github.com/Jaykul/RequiredModules/issues/6
     - name: Manually Install Modules F7History is dependent on
       shell: pwsh
@@ -100,12 +89,24 @@ jobs:
             Install-Module -Name Pester -Force -SkipPublisherCheck -Scope CurrentUser
 
     - name: Run Pester Tests
-      uses: PoshCode/Actions/pester@v1
-      with:
-        pesterVersion: "5.5.0"
-        codeCoveragePath: Modules/F7History
-        moduleUnderTest: F7History
-        additionalModulePaths: ${{github.workspace}}/Modules
+      shell: pwsh
+      run: |
+            $MyOptions = @{
+            Run = @{ # Run configuration.
+              PassThru = $true # Return result object after finishing the test run.
+             }
+            }
+            $config = New-PesterConfiguration -Hashtable $MyOptions
+            $config.Output.Verbosity = "Detailed"
+            $config.CodeCoverage.Enabled = $true
+            $config.CodeCoverage.OutputPath = "./coverage.xml"
+            Invoke-Pester -Configuration $config
+      # uses: PoshCode/Actions/pester@v1
+      # with:
+      #   pesterVersion: "5.5.0"
+      #   codeCoveragePath: Modules/F7History
+      #   moduleUnderTest: F7History
+      #   additionalModulePaths: ${{github.workspace}}/Modules
   
     - name: Publish Test Results
       uses: zyborg/dotnet-tests-report@v1
