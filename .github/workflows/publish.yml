@@ -86,10 +86,10 @@ jobs:
         dotnet-version: 7.0
         dotnet-quality: 'ga'
 
-    - name: Install Required Modules
-      uses: PoshCode/Actions/install-requiredmodules@v1
-      with: 
-        requiredModules-path: ${{github.workspace}}/RequiredModules/RequiredModules.psd1
+    # - name: Install Required Modules
+    #   uses: PoshCode/Actions/install-requiredmodules@v1
+    #   with: 
+    #     requiredModules-path: ${{github.workspace}}/RequiredModules/RequiredModules.psd1
 
     # see https://github.com/Jaykul/RequiredModules/issues/6
     - name: Manually Install Modules F7History is dependent on
