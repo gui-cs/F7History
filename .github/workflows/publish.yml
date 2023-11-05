@@ -115,7 +115,7 @@ jobs:
   publish:
     needs: 
       - build
-    #  - test 
+      - test 
     runs-on: ubuntu-latest
     steps:
       
