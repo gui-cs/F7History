@@ -66,7 +66,8 @@ if ($null -eq $ocgvVersion) {
     $module = (Find-Module $ocgvModule) | Select-Object -ExpandProperty Version | Sort-Object -Descending | Select-Object -First 1
     $v = [Version]::new($module)
     $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build)"
-    "$ocgvModule v $ocgvVersion` found in PSGallery; setting ModuleVersion in $PsdPath"
+    "$ocgvModule v $ocgvVersion` found in PSGallery; Updating -RequiredModules in $PsdPath"
+    cat $PsdPath
     Update-ModuleManifest -Path $PsdPath -RequiredModules @(
         @{
             ModuleName = "PSReadline"; ModuleVersion = "2.1"
