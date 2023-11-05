@@ -34,14 +34,24 @@ Remove-Module $ModuleName -ErrorAction Ignore -Force
 $ModuleUnderTest = Import-Module $FoundModule.FullName -PassThru -Force -DisableNameChecking -Verbose:$false
 Write-Host "Invoke-Pester for Module $($ModuleUnderTest) version $($ModuleUnderTest.Version)"
 
+$MyOptions = @{
+    Run = @{ # Run configuration.
+        PassThru = $true # Return result object after finishing the test run.
+    }
+}
+
+$config = New-PesterConfiguration -Hashtable $MyOptions
+$config.Output.Verbosity = "Detailed"
+
 if ($CodeCoverage) {
+    $config.CodeCoverage.Enabled = $true
+    $config.CodeCoverage.OutputPath = "./coverage.xml"
     # Get code coverage for the psm1 file to a coverage.xml that we can mess with later
-    # Invoke-Pester ./Tests -Show $Show -PesterOption @{
+    #Invoke-Pester -Confi
     #     IncludeVSCodeMarker = $IncludeVSCodeMarker
     # } -CodeCoverage $ModuleUnderTest.Path -CodeCoverageOutputFile ./coverage.xml -PassThru | Convert-CodeCoverage -SourceRoot ./Source
-} else {
-    Invoke-Pester -Path ./Tests 
-}
+} 
+Invoke-Pester -Configuration $config
 
 Write-Host
 if (-not $SkipScriptAnalyzer) {

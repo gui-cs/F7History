@@ -38,7 +38,8 @@ $ocgvModule = "Microsoft.PowerShell.ConsoleGuiTools"
      $localRepositoryPath = $localRepository | Select-Object -ExpandProperty SourceLocation
      $v = Get-ChildItem "${localRepositoryPath}/${ocgvModule}*.nupkg" | Select-Object -ExpandProperty Name | Sort-Object -Descending | Select-Object -First 1
      if ($v -match "$ocgvModule.(.*?).nupkg") {
-        $ocgvVersion = $Matches[1]
+        $v = [Version]::new($Matches[1])
+        $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build)"
         "$ocgvModule v $ocgvVersion found in local repository; setting RequiredVersion in $PsdPath"
         Update-ModuleManifest -Path $PsdPath -RequiredModules @(
             @{
@@ -52,7 +53,9 @@ $ocgvModule = "Microsoft.PowerShell.ConsoleGuiTools"
 } 
 
 if ($null -eq $ocgvVersion) {
-    $ocgvVersion = (Find-Module $ocgvModule).Version
+    $module = (Find-Module $ocgvModule) | Select-Object -ExpandProperty Version | Sort-Object -Descending | Select-Object -First 1
+    $v = [Version]::new($module)
+    $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build)"
     "$ocgvModule v $ocgvVersion` found in PSGallery; setting ModuleVersion in $PsdPath"
     Update-ModuleManifest -Path $PsdPath -RequiredModules @(
         @{
