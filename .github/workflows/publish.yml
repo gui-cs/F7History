@@ -21,7 +21,6 @@ jobs:
       shell: pwsh
       run: |
             dotnet tool install --global PowerShell
-            copy "C:\Users\runneradmin\.dotnet\tools\pwsh.exe ."
 
     - name: Checkout
       uses: actions/checkout@v3
@@ -41,9 +40,9 @@ jobs:
 
     - name: Build F7History v${{ steps.gitversion.outputs.FullSemVer }}
       id: build
-      shell: pwsh {0}
+      shell: ~\.dotnet\tools\pwsh {0}
       run: |
-            pwsh -v
+            ~\.dotnet\tools\pwsh -v
             Install-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
             Import-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
             Install-module -Name ModuleBuilder -Force -SkipPublisherCheck -Scope CurrentUser
