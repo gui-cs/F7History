@@ -35,7 +35,7 @@ jobs:
     - name: Install PowerShell Preview
       shell: pwsh
       run: |
-            winget install --id Microsoft.Powershell.Preview --source winget
+            dotnet tool install --global PowerShell
   
     - name: Build F7History v${{ steps.gitversion.outputs.FullSemVer }}
       id: build
