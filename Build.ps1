@@ -49,16 +49,18 @@ if ($localRepository) {
     $v = Get-ChildItem "${localRepositoryPath}/${ocgvModule}*.nupkg" | Select-Object -ExpandProperty Name | Sort-Object -Descending | Select-Object -First 1
     if ($v -match "$ocgvModule.(.*?).nupkg") {
         $v = [Version]::new($Matches[1])
-        $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build)"
+        $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build).$($v.Revision)"
         "$ocgvModule v $ocgvVersion found in local repository; Updating RequiredVersion in $PsdPath"
         Update-ModuleManifest -Path $PsdPath -RequiredModules @(
             @{
                 ModuleName = "PSReadline"; ModuleVersion = "2.1"
             },
             @{
-                ModuleName = $ocgvModule; RequiredVersion = $ocgvVersion
+                ModuleName = $ocgvModule; ModuleVersion = $ocgvVersion
             }
         ) -ErrorAction Stop
+        # Ensure OCGV is installed and imported from local repo
+        Install-Module $ocgvModule -MinimumVersion $ocgvVersion -Force -Verbose -SkipPublisherCheck
     } 
 } 
 
@@ -67,14 +69,14 @@ if ($null -eq $ocgvVersion) {
     $v = [Version]::new($module)
     $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build)"
     "$ocgvModule v $ocgvVersion` found in PSGallery; Updating -RequiredModules in $PsdPath"
-    #  Update-ModuleManifest -Path $PsdPath -RequiredModules @(
-    #     @{
-    #         ModuleName = "PSReadline"; ModuleVersion = "2.1"
-    #     },
-    #     @{
-    #         ModuleName = $ocgvModule; ModuleVersion = $ocgvVersion
-    #     }
-    # )  -ErrorAction Stop
+     Update-ModuleManifest -Path $PsdPath -RequiredModules @(
+        @{
+            ModuleName = "PSReadline"; ModuleVersion = "2.1"
+        },
+        @{
+            ModuleName = $ocgvModule; ModuleVersion = $ocgvVersion
+        }
+    )  -ErrorAction Stop
 } 
 
 $OldModule = Get-Module $ModuleName -ErrorAction SilentlyContinue
@@ -103,7 +105,7 @@ if ($localRepository) {
     Publish-Module -Path $ModulePath -Repository 'local' -ErrorAction Stop
     "  Installing  $ModuleName to local repository at $localRepositoryPath"
     Install-Module -Name $ModuleName -Repository 'local' -Force -Verbose
-    Import-Module $ModuleName 
+    Import-Module $ModuleName -Force -Verbose
     "$ModuleName $(Get-Module $ModuleName | Select-Object -ExpandProperty Version) installed and imported."
 }
 
