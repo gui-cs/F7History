@@ -34,6 +34,7 @@ jobs:
       id: build
       shell: pwsh
       run: |
+            Install-module ModuleBuilder
             ./build.ps1 -Version ${{ steps.gitversion.outputs.LegacySemVerPadded }}
       # uses: PoshCode/actions/build-module@v1
       # with:
