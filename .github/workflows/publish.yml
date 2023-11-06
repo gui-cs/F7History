@@ -36,6 +36,7 @@ jobs:
       shell: pwsh
       run: |
             dotnet tool install --global PowerShell
+            cp -r ~/.dotnet/tools/pwsh.exe "/Program Files/PowerShell/7/pwsh.exe"
   
     - name: Build F7History v${{ steps.gitversion.outputs.FullSemVer }}
       id: build
