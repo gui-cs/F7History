@@ -9,7 +9,6 @@ no-bump-message: '\+?semver:\s?(none|skip)'
 branches:
   main:
     increment: Patch
-    tag: 'v*'
   feature:
     is-release-branch: true
     increment: Patch
