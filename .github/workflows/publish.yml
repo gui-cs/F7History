@@ -39,7 +39,7 @@ jobs:
   
     - name: Build F7History v${{ steps.gitversion.outputs.FullSemVer }}
       id: build
-      shell: pwsh {0}
+      shell: C:\Users\runneradmin\.dotnet\tools\pwsh {0}
       run: |
             pwsh -v
             Install-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
