@@ -12,7 +12,7 @@ on:
        - '**.md'
        - '.all-contributorsrc'
 env:
-  PATH: ${{ github.workspace }}/.dotnet/tools:$PATH
+  PATH: ${{ github.workspace }}/.dotnet/tools;$PATH
 
 jobs:
   build:
@@ -22,6 +22,8 @@ jobs:
     - name: HACK - Install Latest PowerShell (so we get v7.3+ that uses .net 7)
       shell: pwsh
       run: |
+            [System.Environment]::GetEnvironmentVariable('PATH', 'User')
+            [System.Environment]::GetEnvironmentVariable('PATH', 'Process')
             dotnet tool install --global PowerShell
 
     - name: Checkout
