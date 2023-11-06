@@ -59,7 +59,7 @@ if ($null -eq $ocgvVersion) {
 
 $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build).$($v.Revision)"
 "  Installing $ocgvModule v$ocgvVersion to ensure it is loaded."
-Install-Module $ocgvModule -MinimumVersion $ocgvVersion -Force -Verbose -SkipPublisherCheck
+Install-Module $ocgvModule -MinimumVersion $ocgvVersion -Force -Verbose:($PSBoundParameters['Verbose'] -eq $true) -SkipPublisherCheck
 "  Updating RequiredVersion for $ocgvModule v$ocgvVersion in $PsdPath"
 Update-ModuleManifest -RequiredModules @(
     @{ModuleName = "PSReadline"; ModuleVersion = "2.1" }, 
@@ -92,9 +92,9 @@ if ($localRepository) {
     "  Publishing $ModuleName to local repository at $localRepositoryPath"
     Publish-Module -Path $ModulePath -Repository 'local' -ErrorAction Stop
     "  Installing $ModuleName to local repository at $localRepositoryPath"
-    Install-Module -Name $ModuleName -Repository 'local' -Force -Verbose
+    Install-Module -Name $ModuleName -Repository 'local' -Force -Verbose:($PSBoundParameters['Verbose'] -eq $true)
     "  Importing $ModuleName"
-    Import-Module $ModuleName -Force -Verbose
+    Import-Module $ModuleName -Force -Verbose:($PSBoundParameters['Verbose'] -eq $true)
     "$ModuleName $(Get-Module $ModuleName | Select-Object -ExpandProperty Version) installed and imported."
 }
 

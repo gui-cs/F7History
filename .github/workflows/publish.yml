@@ -36,8 +36,12 @@ jobs:
       id: build
       shell: pwsh
       run: |
+            dotnet --info
+            dotnet --list-runtimes
+            dotnet --version      
+            Import-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
             Install-module -Name ModuleBuilder -Force -SkipPublisherCheck -Scope CurrentUser
-            ./build.ps1 -Version ${{ steps.gitversion.outputs.FullSemVer }}
+            ./build.ps1 -Version ${{ steps.gitversion.outputs.FullSemVer }} -Verbose
 
     - name: Upload Build Output
       uses: actions/upload-artifact@v3
@@ -85,14 +89,13 @@ jobs:
     - name: Manually Install Modules F7History is dependent on
       shell: pwsh
       run: |
-            Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser -Verbose
+            Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
             Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
 
     - name: Run Pester Tests
       shell: pwsh
       run: |
             Import-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
-            ocgv -?
             Import-Module ${{github.workspace}}/Modules/F7History -Verbose
 
             $MyOptions = @{
