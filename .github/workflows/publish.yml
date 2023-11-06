@@ -18,12 +18,11 @@ jobs:
     steps:
 
     - name: HACK - Install Latest PowerShell (so we get v7.3+ that uses .net 7)
-      shell: cmd
+      shell: pwsh
       run: |
             dotnet tool install --global PowerShell
-            copy "C:\Users\runneradmin\.dotnet\tools\pwsh.exe C:\Program Files\PowerShell\7\pwsh.exe"
-        
-      
+            copy "C:\Users\runneradmin\.dotnet\tools\pwsh.exe ."
+
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -42,7 +41,7 @@ jobs:
 
     - name: Build F7History v${{ steps.gitversion.outputs.FullSemVer }}
       id: build
-      shell: C:\Users\runneradmin\.dotnet\tools\pwsh {0}
+      shell: pwsh {0}
       run: |
             pwsh -v
             Install-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
