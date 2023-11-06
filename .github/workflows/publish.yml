@@ -44,6 +44,7 @@ jobs:
       id: build
       shell: pwsh
       run: |
+            gci env:PATH 
             pwsh -v
             
             Install-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force
