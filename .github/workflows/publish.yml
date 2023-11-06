@@ -96,11 +96,12 @@ jobs:
       shell: pwsh
       run: |
           dotnet tool install --global PowerShell
-          $prependText = "C:\Users\runneradmin\.dotnet\tools"
+          $prependText = $HOME + "/.dotnet/tools"
           $filePath = $env:GITHUB_PATH
           $content = Get-Content -Path $filePath
           $newContent = $prependText + "`r`n" + $content
           $newContent | Set-Content -Path $filePath -Encoding utf8
+          $newContent
 
     - name: Download Build Output
       uses: actions/download-artifact@v3
