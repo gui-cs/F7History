@@ -90,7 +90,19 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
+        
     steps:
+
+    - name: HACK - Install Latest PowerShell (so we get v7.3+ that uses .net 7)
+      shell: pwsh
+      run: |
+          dotnet tool install --global PowerShell
+          $prependText = "C:\Users\runneradmin\.dotnet\tools"
+          $filePath = $env:GITHUB_PATH
+          $content = Get-Content -Path $filePath
+          $newContent = $prependText + "`r`n" + $content
+          $newContent | Set-Content -Path $filePath -Encoding utf8
+
     - name: Download Build Output
       uses: actions/download-artifact@v3
 
