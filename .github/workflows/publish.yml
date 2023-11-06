@@ -11,6 +11,8 @@ on:
     paths-ignore:
        - '**.md'
        - '.all-contributorsrc'
+env:
+  PATH: ${{ github.workspace }}/.dotnet/tools:$PATH
 
 jobs:
   build:
@@ -21,9 +23,6 @@ jobs:
       shell: pwsh
       run: |
             dotnet tool install --global PowerShell
-            $oldpath = [System.Environment]::GetEnvironmentVariable('PATH', 'User')
-            [System.Environment]::SetEnvironmentVariable('PATH', 'C:\Users\runneradmin\.dotnet\tools;' + $oldPath, 'User')
-            [System.Environment]::GetEnvironmentVariable('PATH', 'User')
 
     - name: Checkout
       uses: actions/checkout@v3
