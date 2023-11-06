@@ -16,6 +16,14 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+
+    - name: HACK - Install Latest PowerShell (so we get v7.3+ that uses .net 7)
+      shell: pwsh
+      run: |
+            dotnet tool install --global PowerShell
+            cp ~/.dotnet/tools/pwsh.exe "C:/Program Files/PowerShell/7/pwsh.exe"
+        
+      
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -32,12 +40,6 @@ jobs:
       with:
         useConfigFile: true
 
-    - name: Install Latest PowerShell (so we get v7.3+ that uses .net 7)
-      shell: pwsh
-      run: |
-            dotnet tool install --global PowerShell
-            cp -r ~/.dotnet/tools/pwsh.exe "/Program Files/PowerShell/7/pwsh.exe"
-  
     - name: Build F7History v${{ steps.gitversion.outputs.FullSemVer }}
       id: build
       shell: C:\Users\runneradmin\.dotnet\tools\pwsh {0}
