@@ -59,7 +59,8 @@ if ($localRepository) {
                 ModuleName = $ocgvModule; ModuleVersion = $ocgvVersion
             }
         ) -ErrorAction Stop
-        # Ensure OCGV is installed and imported from local repo
+
+        "Installing $ocgvModule v$ocgvVersion to ensure it is loaded from the local repo."
         Install-Module $ocgvModule -MinimumVersion $ocgvVersion -Force -Verbose -SkipPublisherCheck
     } 
 } 
@@ -67,7 +68,7 @@ if ($localRepository) {
 if ($null -eq $ocgvVersion) {
     $module = (Find-Module $ocgvModule) | Select-Object -ExpandProperty Version | Sort-Object -Descending | Select-Object -First 1
     $v = [Version]::new($module)
-    $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build)"
+    $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build).$($v.Revision)"
     "$ocgvModule v $ocgvVersion` found in PSGallery; Updating -RequiredModules in $PsdPath"
      Update-ModuleManifest -Path $PsdPath -RequiredModules @(
         @{
@@ -99,12 +100,13 @@ if ($localRepository) {
 Build-Module -SemVer $Version -OutputDirectory ".${ModulePath}" -SourcePath ./Source -ErrorAction Stop
 
 if ($localRepository) {    
-    "  Removing  $ModuleName"
+    "  Removing $ModuleName"
     Remove-Module $ModuleName -Force -ErrorAction SilentlyContinue
-    "  Publishing  $ModuleName to local repository at $localRepositoryPath"
+    "  Publishing $ModuleName to local repository at $localRepositoryPath"
     Publish-Module -Path $ModulePath -Repository 'local' -ErrorAction Stop
-    "  Installing  $ModuleName to local repository at $localRepositoryPath"
+    "  Installing $ModuleName to local repository at $localRepositoryPath"
     Install-Module -Name $ModuleName -Repository 'local' -Force -Verbose
+    "  Importing $ModuleName"
     Import-Module $ModuleName -Force -Verbose
     "$ModuleName $(Get-Module $ModuleName | Select-Object -ExpandProperty Version) installed and imported."
 }
