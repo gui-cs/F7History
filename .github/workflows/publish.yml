@@ -21,8 +21,9 @@ jobs:
       shell: pwsh
       run: |
             dotnet tool install --global PowerShell
-            $oldpath = [System.Environment]::GetEnvironmentVariable('PATH', 'Machine')
-            [System.Environment]::SetEnvironmentVariable('PATH', 'C:\Users\runneradmin\.dotnet\tools;' + $newPath, 'Machine')
+            $oldpath = [System.Environment]::GetEnvironmentVariable('PATH', 'User')
+            [System.Environment]::SetEnvironmentVariable('PATH', 'C:\Users\runneradmin\.dotnet\tools;' + $oldPath, 'User')
+            [System.Environment]::GetEnvironmentVariable('PATH', 'User')
 
     - name: Checkout
       uses: actions/checkout@v3
@@ -44,6 +45,7 @@ jobs:
       id: build
       shell: pwsh
       run: |
+            [System.Environment]::GetEnvironmentVariable('PATH', 'User')
             gci env:PATH 
             pwsh -v
             
