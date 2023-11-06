@@ -21,12 +21,8 @@ jobs:
       shell: pwsh
       run: |
             dotnet tool install --global PowerShell
-            $prependText = $HOME + "/.dotnet/tools"
-            $filePath = $env:GITHUB_PATH
-            $content = Get-Content -Path $filePath
-            $newContent = $prependText + "`r`n" + $content
-            $newContent | Set-Content -Path $filePath -Encoding utf8
-            $newContent
+            $content = Get-Content -Path $env:GITHUB_PATH
+            $HOME + "/.dotnet/tools`r`n" + $content | Set-Content -Path $env:GITHUB_PATH -Encoding utf8
 
     - name: Checkout
       uses: actions/checkout@v3
@@ -95,13 +91,9 @@ jobs:
     - name: HACK - Install Latest PowerShell (so we get v7.3+ that uses .net 7)
       shell: pwsh
       run: |
-          dotnet tool install --global PowerShell
-          $prependText = $HOME + "/.dotnet/tools"
-          $filePath = $env:GITHUB_PATH
-          $content = Get-Content -Path $filePath
-          $newContent = $prependText + "`r`n" + $content
-          $newContent | Set-Content -Path $filePath -Encoding utf8
-          $newContent
+            dotnet tool install --global PowerShell
+            $content = Get-Content -Path $env:GITHUB_PATH
+            $HOME + "/.dotnet/tools`r`n" + $content | Set-Content -Path $env:GITHUB_PATH -Encoding utf8
 
     - name: Download Build Output
       uses: actions/download-artifact@v3
@@ -129,12 +121,6 @@ jobs:
             $config.CodeCoverage.Enabled = $true
             $config.CodeCoverage.OutputPath = "./coverage.xml"
             Invoke-Pester -Configuration $config
-      # uses: PoshCode/Actions/pester@v1
-      # with:
-      #   pesterVersion: "5.5.0"
-      #   codeCoveragePath: Modules/F7History
-      #   moduleUnderTest: F7History
-      #   additionalModulePaths: ${{github.workspace}}/Modules
   
     - name: Publish Test Results
       uses: zyborg/dotnet-tests-report@v1
@@ -161,11 +147,11 @@ jobs:
       #   run: ls -R
 
       # see https://github.com/Jaykul/RequiredModules/issues/6
-      - name: Manually Install Modules F7History is dependent on
-        shell: pwsh
-        run: |
-            Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
-            Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
+      # - name: Manually Install Modules F7History is dependent on
+      #   shell: pwsh
+      #   run: |
+      #       Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
+      #       Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
     
       - name: Publish Module to PowerShell Gallery
         shell: pwsh
