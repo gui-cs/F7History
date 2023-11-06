@@ -32,16 +32,16 @@ jobs:
       with:
         useConfigFile: true
 
-    - name: Install PowerShell Preview
+    - name: Install Latest PowerShell (so we get v7.3+ that uses .net 7)
       shell: pwsh
       run: |
             dotnet tool install --global PowerShell
   
     - name: Build F7History v${{ steps.gitversion.outputs.FullSemVer }}
       id: build
-      shell: pwsh
+      shell: pwsh {0}
       run: |
-            ls 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.13\System.Runtime.dll'
+            pwsh -v
             Install-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
             Import-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
             Install-module -Name ModuleBuilder -Force -SkipPublisherCheck -Scope CurrentUser
