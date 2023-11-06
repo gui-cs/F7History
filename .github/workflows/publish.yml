@@ -20,6 +20,7 @@ jobs:
     - name: HACK - Install Latest PowerShell (so we get v7.3+ that uses .net 7)
       shell: pwsh
       run: |
+            msiexec.exe /package PowerShell-7.3.9-win-x64.msi /quiet ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL=1 ENABLE_PSREMOTING=1 REGISTER_MANIFEST=1 USE_MU=1 ENABLE_MU=1 ADD_PATH=1
             dotnet tool install --global PowerShell
 
     - name: Checkout
@@ -42,8 +43,8 @@ jobs:
       id: build
       shell: pwsh
       run: |
-            ~\.dotnet\tools\pwsh -v
-            ~\.dotnet\tools\pwsh -noprofile -command "Install-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force ; Import-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force ; Install-module -Name ModuleBuilder -Force -SkipPublisherCheck -Scope CurrentUser ; ./build.ps1 -Version ${{ steps.gitversion.outputs.FullSemVer }} -Verbose
+            C:\Users\runneradmin\.dotnet\tools\pwsh -v
+            C:\Users\runneradmin\.dotnet\tools\pwsh -noprofile -command "Install-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force ; Import-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force ; Install-module -Name ModuleBuilder -Force -SkipPublisherCheck -Scope CurrentUser ; ./build.ps1 -Version ${{ steps.gitversion.outputs.FullSemVer }} -Verbose
 
     - name: Upload Build Output
       uses: actions/upload-artifact@v3
