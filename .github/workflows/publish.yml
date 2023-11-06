@@ -82,18 +82,15 @@ jobs:
       uses: actions/download-artifact@v3
 
     # see https://github.com/Jaykul/RequiredModules/issues/6
-    # - name: Manually Install Modules F7History is dependent on
-    #   shell: pwsh
-    #   run: |
-    #         Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
-    #         Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
-
-    - name: Run Pester Tests
+    - name: Manually Install Modules F7History is dependent on
       shell: pwsh
       run: |
             Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
             Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
 
+    - name: Run Pester Tests
+      shell: pwsh
+      run: |
             Import-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose
             Import-Module ${{github.workspace}}/Modules/F7History -Verbose
 
