@@ -91,6 +91,7 @@ jobs:
     - name: Run Pester Tests
       shell: pwsh
       run: |
+            ocgv -?
             Import-Module ${{github.workspace}}/Modules/F7History -Verbose
 
             $MyOptions = @{
