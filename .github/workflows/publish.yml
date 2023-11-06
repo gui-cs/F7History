@@ -43,6 +43,7 @@ jobs:
       id: build
       shell: pwsh
       run: |
+            gci env:* | sort-object name
             C:\Users\runneradmin\.dotnet\tools\pwsh -v
             C:\Users\runneradmin\.dotnet\tools\pwsh -noprofile -command "Install-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force ; Import-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force ; Install-module -Name ModuleBuilder -Force -SkipPublisherCheck -Scope CurrentUser ; ./build.ps1 -Version ${{ steps.gitversion.outputs.FullSemVer }} -Verbose
 
