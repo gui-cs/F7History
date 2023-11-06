@@ -32,12 +32,12 @@ jobs:
       with:
         useConfigFile: true
   
-    - name: Build Module
+    - name: Build F7History v${{ steps.gitversion.outputs.FullSemVer }}
       id: build
       shell: pwsh
       run: |
             Install-module -Name ModuleBuilder -Force -SkipPublisherCheck -Scope CurrentUser
-            ./build.ps1 -Version ${{ steps.gitversion.outputs.LegacySemVerPadded }}
+            ./build.ps1 -Version ${{ steps.gitversion.outputs.FullSemVer }}
 
     - name: Upload Build Output
       uses: actions/upload-artifact@v3
