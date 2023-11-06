@@ -46,7 +46,7 @@ jobs:
       shell: pwsh
       run: |
             [System.Environment]::GetEnvironmentVariable('PATH', 'User')
-            gci env:PATH 
+            [System.Environment]::GetEnvironmentVariable('PATH', 'Process')
             pwsh -v
             
             Install-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force
