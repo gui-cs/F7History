@@ -11,8 +11,6 @@ on:
     paths-ignore:
        - '**.md'
        - '.all-contributorsrc'
-# env:
-#   PATH: C:\Users\runneradmin\.dotnet\tools;$PATH
 
 jobs:
   build:
@@ -23,7 +21,7 @@ jobs:
       shell: pwsh
       run: |
             dotnet tool install --global PowerShell
-            $prependText = "C:\Users\runneradmin\.dotnet\tools"
+            $prependText = $HOME +"/.dotnet/tools"
             $filePath = $env:GITHUB_PATH
             $content = Get-Content -Path $filePath
             $newContent = $prependText + "`r`n" + $content
