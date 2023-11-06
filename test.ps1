@@ -57,7 +57,7 @@ Write-Host
 if (-not $SkipScriptAnalyzer) {
     $path =  Split-Path $ModuleUnderTest.Path -Parent
     Write-Host "Invoke-ScriptAnalyzer for $path"
-    Invoke-ScriptAnalyzer $path -Recurse
+    Invoke-ScriptAnalyzer $path -Recurse -Settings PSGallery
 }
 Pop-Location
 
