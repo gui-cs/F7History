@@ -31,12 +31,16 @@ jobs:
       uses: gittools/actions/gitversion/execute@v0
       with:
         useConfigFile: true
+
+    - name: Install PowerShell Preview
+      shell: pwsh
+      run: |
+            winget install --id Microsoft.Powershell.Preview --source winget
   
     - name: Build F7History v${{ steps.gitversion.outputs.FullSemVer }}
       id: build
       shell: pwsh
       run: |
-            dotnet --list-runtimes
             ls 'C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.13\System.Runtime.dll'
             Install-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
             Import-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
