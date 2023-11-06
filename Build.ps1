@@ -19,21 +19,19 @@ if ($null -eq $Version -or "" -eq $Version) {
             $prevVersionParts = $prevVersion -split '\.'
             $build = [int]$prevVersionParts[3] + 1
             $Version = "{0}.{1}.{2}.{3}" -f $prevVersionParts[0], $prevVersionParts[1], $prevVersionParts[2], $build
-            "Extracted version number from $ModulePath/$ModuleName.psd1: $Version"
+            "Got version from $ModulePath/$ModuleName.psd1: $Version"
         }
         else {
             throw "Version not found in $ModulePath/$ModuleName.psd1."
         }
     }
     else {
-        "No previous version found. Assuming this is the first build."
-        "Getting the Verison using dotnet-gitversion..."
+        # No previous version found. Assuming this is the first build.
         $prevVersion = dotnet-gitversion /showvariable MajorMinorPatch
         $Version = "$($prevVersion).$($build)"
+        "Got version from dotnet-gitversion: $Version"
     }
 }
-
-"Building Version: $Version"
 
 # Ensure we're using the correct version of ConsoleGuiTools
 # If there's a local repository, use the latest version from there and set the RequiredVersion in the .psd1 file
@@ -49,20 +47,20 @@ if ($localRepository) {
     $v = Get-ChildItem "${localRepositoryPath}/${ocgvModule}*.nupkg" | Select-Object -ExpandProperty Name | Sort-Object -Descending | Select-Object -First 1
     if ($v -match "$ocgvModule.(.*?).nupkg") {
         $v = [Version]::new($Matches[1])
-        "$ocgvModule v$v found in local repository"
+        "  $ocgvModule v$v found in local repository"
     } 
 } 
 
 if ($null -eq $ocgvVersion) {
     $module = (Find-Module $ocgvModule) | Select-Object -ExpandProperty Version | Sort-Object -Descending | Select-Object -First 1
     $v = [Version]::new($module)
-    "$ocgvModule v$v found in PSGallery"
+    "  $ocgvModule v$v found in PSGallery"
 } 
 
 $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build).$($v.Revision)"
-"Installing $ocgvModule v$ocgvVersion to ensure it is loaded from the local repo."
+"  Installing $ocgvModule v$ocgvVersion to ensure it is loaded."
 Install-Module $ocgvModule -MinimumVersion $ocgvVersion -Force -Verbose -SkipPublisherCheck
-"Updating RequiredVersion for $ocgvModule v$ocgvVersion in $PsdPath"
+"  Updating RequiredVersion for $ocgvModule v$ocgvVersion in $PsdPath"
 Update-ModuleManifest -RequiredModules @(
     @{ModuleName = "PSReadline"; ModuleVersion = "2.1" }, 
     @{ModuleName = $ocgvModule; ModuleVersion = $ocgvVersion }
@@ -70,7 +68,7 @@ Update-ModuleManifest -RequiredModules @(
 
 $OldModule = Get-Module $ModuleName -ErrorAction SilentlyContinue
 if ($OldModule) {
-    "Removing $ModuleName $($OldModule.Version)"
+    "Removing and uninstalling old version: $ModuleName $($OldModule.Version)"
     Remove-Item $ModulePath -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Module $ModuleName -Force -ErrorAction SilentlyContinue
     Remove-Module Microsoft.PowerShell.ConsoleGuiTools
@@ -80,7 +78,7 @@ if ($OldModule) {
 $localRepository = Get-PSRepository | Where-Object { $_.Name -eq 'local' }
 if ($localRepository) {    
     $localRepositoryPath = $localRepository | Select-Object -ExpandProperty SourceLocation
-    "  Un-publishing $ModuleName $($OldModule.Version) from local repository at $localRepositoryPath"
+    "Un-publishing $ModuleName $($OldModule.Version) from local repository at $localRepositoryPath"
     Remove-Item "${localRepositoryPath}/${ModuleName}*.nupkg" -Recurse -Force -ErrorAction SilentlyContinue
 }
 
@@ -88,6 +86,7 @@ if ($localRepository) {
 Build-Module -SemVer $Version -OutputDirectory ".${ModulePath}" -SourcePath ./Source -ErrorAction Stop
 
 if ($localRepository) {    
+    "Local repository found; importing for testing..."
     "  Removing $ModuleName"
     Remove-Module $ModuleName -Force -ErrorAction SilentlyContinue
     "  Publishing $ModuleName to local repository at $localRepositoryPath"
