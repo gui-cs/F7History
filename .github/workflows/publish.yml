@@ -21,7 +21,7 @@ jobs:
       shell: cmd
       run: |
             dotnet tool install --global PowerShell
-            copy "C:\Users\runneradmin\.dotnet\tools\pwsh.exe "C:\Program Files\PowerShell\7\pwsh.exe"
+            copy "C:\Users\runneradmin\.dotnet\tools\pwsh.exe C:\Program Files\PowerShell\7\pwsh.exe"
         
       
     - name: Checkout
