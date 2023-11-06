@@ -91,6 +91,7 @@ jobs:
     - name: Run Pester Tests
       shell: pwsh
       run: |
+            Import-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
             ocgv -?
             Import-Module ${{github.workspace}}/Modules/F7History -Verbose
 
