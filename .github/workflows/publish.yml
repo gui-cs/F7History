@@ -11,14 +11,38 @@ on:
     paths-ignore:
        - '**.md'
        - '.all-contributorsrc'
-env:
-  PATH: C:\Users\runneradmin\.dotnet\tools;$PATH
+# env:
+#   PATH: C:\Users\runneradmin\.dotnet\tools;$PATH
 
 jobs:
   build:
     runs-on: windows-latest
     steps:
 
+    - name: Add C:\Users\runneradmin\.dotnet\tools to PATH
+      shell: pwsh
+      run: |
+            # Define the text you want to prepend
+            $prependText = "C:\Users\runneradmin\.dotnet\tools"
+
+            # Specify the file path
+            $filePath = $env:GITHUB_PATH
+
+            $filePath
+
+            # Read the existing content of the file
+            $content = Get-Content -Path $filePath
+
+            # Combine the prependText and existing content with a line break
+            $newContent = $prependText + "`r`n" + $content
+
+            # Write the modified content back to the file, overwriting it
+            $newContent | Set-Content -Path $filePath -Encoding utf8
+            
+            $newContent
+
+            # echo "C:\Users\runneradmin\.dotnet\tools" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+  
     - name: HACK - Install Latest PowerShell (so we get v7.3+ that uses .net 7)
       shell: pwsh
       run: |
