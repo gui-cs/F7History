@@ -1,11 +1,7 @@
-# We use `MainLine Development`. See https://gitversion.net/docs/reference/modes/mainline
-
 name: Publish to PowerShell Gallery
 
 on:
   push:
-    branches: 
-      - main
     tags:
       - v*
     paths-ignore:
@@ -147,11 +143,11 @@ jobs:
       #   run: ls -R
 
       # see https://github.com/Jaykul/RequiredModules/issues/6
-      # - name: Manually Install Modules F7History is dependent on
-      #   shell: pwsh
-      #   run: |
-      #       Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
-      #       Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
+      - name: Manually Install Modules F7History is dependent on
+        shell: pwsh
+        run: |
+            Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
+            Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
     
       - name: Publish Module to PowerShell Gallery
         shell: pwsh

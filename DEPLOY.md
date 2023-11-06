@@ -30,13 +30,18 @@ If `Build.ps1` finds a local repository it will use it instead of the PowerShell
 
 ## To Publish a new version to the PowerShell Gallery:
 
-We use `MainLine Development`. See https://gitversion.net/docs/reference/modes/mainline
-
 The module is published to the PowerShell Gallery using GitHub Actions. See the publish.yml GitHub Action for details.
 
-Merge changes to the `main` branch, or push directly to `main`. The GitHub Action will build and publish the module to the PowerShell Gallery here: https://www.powershellgallery.com/packages/F7History
+1) Merge changes to the `main` branch, or push directly to `main`. The GitHub Action will build the module, but not publish it.
 
-To increment the minor version ensure the merge message includes "+semver: minor". To increment the major version ensure the merge message includes "+semver: major". See https://gitversion.net/docs/reference/version-increments
+2) Add and push a new tag
+
+```ps1
+git tag v1.4.1 -a -m "Release v1.4.1"
+git push --atomic origin main v1.4.1
+```
+
+ This will build, test, and publish to the PowerShell Gallery here: https://www.powershellgallery.com/packages/F7History
 
 ## Contributors ✨
 
