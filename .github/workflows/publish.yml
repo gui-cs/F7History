@@ -36,7 +36,7 @@ jobs:
       id: build
       shell: pwsh
       run: |
-            dotnet --list-runtimes
+            ls C:\Users\runneradmin\Documents\PowerShell\Modules\Microsoft.PowerShell.ConsoleGuiTools\0.7.6.0\
             Install-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
             Import-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
             Install-module -Name ModuleBuilder -Force -SkipPublisherCheck -Scope CurrentUser
