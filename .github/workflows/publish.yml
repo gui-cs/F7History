@@ -12,7 +12,7 @@ on:
        - '**.md'
        - '.all-contributorsrc'
 env:
-  PATH: ${{ github.workspace }}/.dotnet/tools;$PATH
+  PATH: C:\Users\runneradmin\.dotnet\tools;$PATH
 
 jobs:
   build:
