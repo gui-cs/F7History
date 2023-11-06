@@ -70,14 +70,7 @@ if ($null -eq $ocgvVersion) {
     $v = [Version]::new($module)
     $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build).$($v.Revision)"
     "$ocgvModule v$v` found in PSGallery; Updating -RequiredModules in $PsdPath"
-    Update-ModuleManifest -Path $PsdPath -RequiredModules @(
-        @{
-            ModuleName = "PSReadline"; ModuleVersion = "2.1"
-        },
-        @{
-            ModuleName = $ocgvModule; ModuleVersion = $ocgvVersion
-        }
-    )  -ErrorAction Stop -Verbose
+    Update-ModuleManifest -Path $PsdPath -RequiredModules @(@{ModuleName = "PSReadline"; ModuleVersion = "2.1"},@{ModuleName = $ocgvModule; ModuleVersion = $ocgvVersion})  -ErrorAction Stop -Verbose
 } 
 
 $OldModule = Get-Module $ModuleName -ErrorAction SilentlyContinue
