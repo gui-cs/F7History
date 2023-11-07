@@ -1,6 +1,6 @@
 # We use `MainLine Development`. See https://gitversion.net/docs/reference/modes/mainline
 
-name: Build and Test
+name: Build and Test F7History
 
 on:
   pull_request:
@@ -14,36 +14,48 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+
+    - name: HACK - Install Latest PowerShell (so we get v7.3+ that uses .net 7)
+      shell: pwsh
+      run: |
+            dotnet tool install --global PowerShell
+            $content = Get-Content -Path $env:GITHUB_PATH
+            $HOME + "/.dotnet/tools`r`n" + $content | Set-Content -Path $env:GITHUB_PATH -Encoding utf8
+
     - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Install-RequiredModules
-      uses: PoshCode/Actions/install-requiredmodules@v1
-
-    - name: Build Module
-      id: build
-      uses: PoshCode/actions/build-module@v1
+      uses: actions/checkout@v3
       with:
-        path: ${{github.workspace}}/Source
-        destination: ${{github.workspace}}/output
+        fetch-depth: 0
+
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0
+      with:
+        versionSpec: '5.x'
+
+    - name: Determine Version
+      id:   gitversion 
+      uses: gittools/actions/gitversion/execute@v0
+      with:
+        useConfigFile: true
+
+    - name: Build F7History v${{ steps.gitversion.outputs.FullSemVer }}
+      id: build
+      shell: pwsh
+      run: |
+            Install-module -Name ModuleBuilder -Force -SkipPublisherCheck -Scope CurrentUser 
+            ./build.ps1 -Version ${{ steps.gitversion.outputs.FullSemVer }}
 
     - name: Upload Build Output
       uses: actions/upload-artifact@v3
       with:
         name: Modules
-        path: ${{github.workspace}}/output
+        path: ${{github.workspace}}/Output
 
     - name: Upload Tests
       uses: actions/upload-artifact@v3
       with:
         name: PesterTests
         path: ${{github.workspace}}/Tests
-
-    - name: Upload RequiredModules.psd1
-      uses: actions/upload-artifact@v3
-      with:
-        name: RequiredModules
-        path: ${{github.workspace}}/RequiredModules.psd1
 
     - name: Upload PSScriptAnalyzerSettings.psd1
       uses: actions/upload-artifact@v3
@@ -71,14 +83,17 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
+        
     steps:
+
+    - name: HACK - Install Latest PowerShell (so we get v7.3+ that uses .net 7)
+      shell: pwsh
+      run: |
+            dotnet tool install --global PowerShell
+            "$HOME/.dotnet/tools`r`n$(Get-Content -Path $env:GITHUB_PATH)" | Set-Content -Path $env:GITHUB_PATH -Encoding utf8
+
     - name: Download Build Output
       uses: actions/download-artifact@v3
-
-    - name: Install Required Modules
-      uses: PoshCode/Actions/install-requiredmodules@v1
-      with: 
-        requiredModules-path: ${{github.workspace}}/RequiredModules/RequiredModules.psd1
 
     # see https://github.com/Jaykul/RequiredModules/issues/6
     - name: Manually Install Modules F7History is dependent on
@@ -86,15 +101,22 @@ jobs:
       run: |
             Install-Module -Name Microsoft.PowerShell.ConsoleGuiTools -Force -SkipPublisherCheck -Scope CurrentUser
             Install-Module -Name PSReadLine -Force -SkipPublisherCheck -Scope CurrentUser
-            Install-Module -Name Pester -RequiredVersion "4.10.1"  -Force -SkipPublisherCheck -Scope CurrentUser
 
     - name: Run Pester Tests
-      uses: PoshCode/Actions/pester@v1
-      with:
-        pesterVersion: "4.10.1"
-        codeCoveragePath: Modules/F7History
-        moduleUnderTest: F7History
-        additionalModulePaths: ${{github.workspace}}/Modules
+      shell: pwsh
+      run: |
+            Import-Module ${{github.workspace}}/Modules/F7History -Verbose
+
+            $MyOptions = @{
+            Run = @{ # Run configuration.
+              PassThru = $true # Return result object after finishing the test run.
+              }
+            }
+            $config = New-PesterConfiguration -Hashtable $MyOptions
+            $config.Output.Verbosity = "Detailed"
+            $config.CodeCoverage.Enabled = $true
+            $config.CodeCoverage.OutputPath = "./coverage.xml"
+            Invoke-Pester -Configuration $config
   
     - name: Publish Test Results
       uses: zyborg/dotnet-tests-report@v1
