@@ -5,6 +5,13 @@
 ![PowerShell Gallery](https://img.shields.io/powershellgallery/p/F7History)
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 
+<div align="center">
+  <img src="icon.png"
+       alt="F7 History Icon"
+       width="100px"
+  />
+</div>
+
 ## F7History - Graphical Command History for PowerShell
 
 A PowerShell module that provides a graphical Command History activated by the `F7` and `Shift-F7` keys.
