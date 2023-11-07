@@ -42,11 +42,16 @@ If `Build.ps1` finds a local repository it will use it instead of the PowerShell
 The module is published to the PowerShell Gallery using GitHub Actions. See the publish.yml GitHub Action for details.
 
 1) Merge changes to the `main` branch, or push directly to `main`. The GitHub Action will build the module, but not publish it.
-2) Add and push a new tag
+2) Add and push a new tag using `Deploy.ps1`:
 
 ```ps1
-git tag v1.4.1 -a -m "Release v1.4.1"
-git push --atomic origin main v1.4.1
+# Don't use -Version to let GitVersion generate the version number (last tag + patch increment)
+./Deploy.ps1
+```
+
+```ps1
+# Specify the version number to override default behavior of using GitVersion to generate the version number.
+./Deploy.ps1 -Version 1.4.2
 ```
 
  This will build, test, and publish to the PowerShell Gallery here: https://www.powershellgallery.com/packages/F7History
