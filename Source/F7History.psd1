@@ -15,7 +15,7 @@ RootModule = 'F7History.psm1'
 ModuleVersion = '0.0.0'
 
 # Supported PSEditions
-# CompatiblePSEditions = @()
+CompatiblePSEditions = 'Core'
 
 # ID used to uniquely identify this module
 GUID = 'af35b6c1-758f-4d46-92ae-ac18cb9c983d'
@@ -33,7 +33,7 @@ Copyright = '(c) Kindel, LLC. All rights reserved.'
 Description = 'Press F7 to get a graphical Command History in Powershell.'
 
 # Minimum version of the PowerShell engine required by this module
-# PowerShellVersion = ''
+PowerShellVersion = '7.2'
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''
