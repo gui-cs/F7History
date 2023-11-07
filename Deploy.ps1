@@ -8,7 +8,6 @@ param(
     $Version
 )
 
-$ModuleName = "F7History"
 if ($null -eq $Version -or "" -eq $Version) {
     $Version = "v$(dotnet-gitversion /showvariable MajorMinorPatch)"
 } else {
