@@ -88,8 +88,7 @@ jobs:
       shell: pwsh
       run: |
             dotnet tool install --global PowerShell
-            $content = Get-Content -Path $env:GITHUB_PATH
-            $HOME + "/.dotnet/tools`r`n" + $content | Set-Content -Path $env:GITHUB_PATH -Encoding utf8
+            "$HOME/.dotnet/tools`r`n$(Get-Content -Path $env:GITHUB_PATH)" | Set-Content -Path $env:GITHUB_PATH -Encoding utf8
 
     - name: Download Build Output
       uses: actions/download-artifact@v3
@@ -104,7 +103,6 @@ jobs:
     - name: Run Pester Tests
       shell: pwsh
       run: |
-            Import-Module Microsoft.PowerShell.ConsoleGuiTools -Verbose -Force 
             Import-Module ${{github.workspace}}/Modules/F7History -Verbose
 
             $MyOptions = @{
