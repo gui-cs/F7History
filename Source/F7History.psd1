@@ -100,7 +100,7 @@ PrivateData = @{
         ProjectUri = 'https://github.com/gui-cs/F7History/'
 
         # A URL to an icon representing this module.
-        IconUri = 'https://gui-cs.github.io/Terminal.Gui/images/logo48.png'
+        IconUri = 'https://github.com/gui-cs/F7History/blob/main/icon.png'
 
         # ReleaseNotes of this module
         ReleaseNotes = 'https://github.com/gui-cs/F7History/releases'
