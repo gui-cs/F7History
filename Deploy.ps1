@@ -22,5 +22,5 @@ if ($null -eq $Version -or "" -eq $Version) {
     git tag $Version
 }
 
-# Push the tag to origin using atomic
-git push --atomic origin main $Version 
+# Push the tag to upstream using atomic
+git push --atomic upstream main $Version 
