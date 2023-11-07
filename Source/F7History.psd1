@@ -52,7 +52,7 @@ Description = 'Press F7 to get a graphical Command History in Powershell.'
 
 # Modules that must be imported into the global environment prior to importing this module
 RequiredModules = @(@{ModuleName = 'PSReadline'; ModuleVersion = '2.1'; }, 
-               @{ModuleName = 'Microsoft.PowerShell.ConsoleGuiTools'; ModuleVersion = '0.7.6.0'; })
+               @{ModuleName = 'Microsoft.PowerShell.ConsoleGuiTools'; ModuleVersion = '0.7.6.3'; })
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
@@ -117,7 +117,7 @@ PrivateData = @{
         # RequireLicenseAcceptance = $false
 
         # External dependent modules of this module
-        ExternalModuleDependencies = @('Microsoft.PowerShell.ConsoleGuiTools','PSReadLine')
+        # ExternalModuleDependencies = @()
 
     } # End of PSData hashtable
 
