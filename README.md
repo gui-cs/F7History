@@ -1,5 +1,3 @@
-![F7History](https://socialify.git.ci/gui-cs/F7History/image?description=1&font=Source%20Code%20Pro&language=1&owner=1&pattern=Circuit%20Board&theme=Auto)
-
 ![PowerShell Gallery Version (including pre-releases)](https://img.shields.io/powershellgallery/v/F7History)
 ![PowerShell Gallery](https://img.shields.io/powershellgallery/dt/F7History)
 ![PowerShell Gallery](https://img.shields.io/powershellgallery/p/F7History)
