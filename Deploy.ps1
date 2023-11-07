@@ -1,6 +1,7 @@
 # Script for deploying module via github actions
-# If -Version is not specified, it will use the output from gitversion 
-# and remove the build number and add 1 to the revision number
+# If -Version is not specified, it will use the output from gitversion MajorMinorPatch
+# which is from the latest tag
+# 
 param(
     [parameter(Mandatory = $false)]
     [String] 
@@ -10,9 +11,16 @@ param(
 $ModuleName = "F7History"
 if ($null -eq $Version -or "" -eq $Version) {
     $prevVersion = dotnet-gitversion /showvariable MajorMinorPatch
-    $build = dotnet-gitversion /showvariable BuildMetaData
-    "Got build from dotnet-gitversion: $build"
-    $Version = "$($prevVersion).$($build)"
+    $Version = "v$($prevVersion)"
     "Got version from dotnet-gitversion: $Version"
+} else {
+    # If no 'v` was prefixed, add it
+    if ($Version -notmatch "^v") {
+        $Version = "v$($Version)"
+    }
+    "Adding tag: $Version"
+    git tag $Version
 }
 
+# Push the tag to origin using atomic
+git push --atomic origin main $Version 
