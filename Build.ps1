@@ -35,11 +35,8 @@ if ($null -eq $Version -or "" -eq $Version) {
 }
 
 # Ensure we're using the correct version of ConsoleGuiTools
-# If there's a local repository, use the latest version from there and set the RequiredVersion in the .psd1 file
-# If there's NOT a local repo, use the latest version from the PowerShell Gallery and set the ModuleVersion in the .psd1 file
 $PsdPath = "./Source/$($ModuleName).psd1"
 $ocgvModule = "Microsoft.PowerShell.ConsoleGuiTools"
-"Patching $PsdPath with correct $ocgvModule version"
 
 # Find new version of ConsoleGuiTools in 'local' repository
 $localRepository = Get-PSRepository | Where-Object { $_.Name -eq 'local' }
@@ -71,16 +68,6 @@ if ($null -eq $ocgvVersion) {
 $ocgvVersion = "$($v.Major).$($v.Minor).$($v.Build).$($v.Revision)"
 "  Installing $ocgvModule v$ocgvVersion to ensure it is loaded."
 Install-Module $ocgvModule -MinimumVersion $ocgvVersion -Force -Verbose:($PSBoundParameters['Verbose'] -eq $true) -SkipPublisherCheck
-"  Updating RequiredVersion for $ocgvModule v$ocgvVersion in $PsdPath"
-Update-ModuleManifest -RequiredModules @(
-    @{ModuleName = "PSReadline"; ModuleVersion = "2.1" }, 
-    @{ModuleName = $ocgvModule; ModuleVersion = $ocgvVersion }
-) -Path $PsdPath -ErrorAction Stop
-
-if (-not $SkipScriptAnalyzer) {
-    Write-Host "Invoke-ScriptAnalyzer with -Fixfor $PsdPath"
-    Invoke-ScriptAnalyzer $PsdPath -Settings PSGallery -Fix -ErrorAction Stop
-}
 
 $OldModule = Get-Module $ModuleName -ErrorAction SilentlyContinue
 if ($OldModule) {
