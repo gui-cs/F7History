@@ -1,5 +1,3 @@
-# We use `MainLine Development`. See https://gitversion.net/docs/reference/modes/mainline
-
 name: Build and Test F7History
 
 on:
