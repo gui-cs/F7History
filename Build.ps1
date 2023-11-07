@@ -1,4 +1,5 @@
 param(
+    [switch]$SkipScriptAnalyzer,
     [parameter(Mandatory = $false)]
     [String] 
     $Version
@@ -65,6 +66,11 @@ Update-ModuleManifest -RequiredModules @(
     @{ModuleName = "PSReadline"; ModuleVersion = "2.1" }, 
     @{ModuleName = $ocgvModule; ModuleVersion = $ocgvVersion }
 ) -Path $PsdPath -ErrorAction Stop
+
+if (-not $SkipScriptAnalyzer) {
+    Write-Host "Invoke-ScriptAnalyzer with -Fix for $ModulePath/$ModuleName.psd1"
+    Invoke-ScriptAnalyzer "$ModulePath/$ModuleName.psd1" -Recurse -Settings PSGallery -Fix -ErrorAction Stop
+}
 
 $OldModule = Get-Module $ModuleName -ErrorAction SilentlyContinue
 if ($OldModule) {
