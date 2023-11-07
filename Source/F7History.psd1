@@ -117,7 +117,7 @@ PrivateData = @{
         # RequireLicenseAcceptance = $false
 
         # External dependent modules of this module
-        # ExternalModuleDependencies = @()
+        ExternalModuleDependencies = @('Microsoft.PowerShell.ConsoleGuiTools','PSReadLine')
 
     } # End of PSData hashtable
 
