@@ -11,16 +11,15 @@ param(
 $ModuleName = "F7History"
 if ($null -eq $Version -or "" -eq $Version) {
     $Version = "v$(dotnet-gitversion /showvariable MajorMinorPatch)"
-    "New version: $Version"
 } else {
     # If no 'v` was prefixed, add it
     if ($Version -notmatch "^v") {
         $Version = "v$($Version)"
     }
-
-    "Adding tag: $Version"
-    git tag $Version
 }
+
+"Adding tag: $Version"
+git tag $Version
 
 # Push the tag to upstream using atomic
 git push --atomic upstream main $Version 
