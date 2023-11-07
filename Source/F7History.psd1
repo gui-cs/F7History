@@ -29,13 +29,13 @@ Copyright = '(c) Kindel, LLC. All rights reserved.'
 Description = 'Press F7 to get a graphical Command History in Powershell.'
 
 # Minimum version of the PowerShell engine required by this module
-# PowerShellVersion = ''
+PowerShellVersion = '7.2'
 
 # Name of the PowerShell host required by this module
-PowerShellHostName = '7.2'
+# PowerShellHostName = ''
 
 # Minimum version of the PowerShell host required by this module
-# PowerShellHostVersion = ''
+# PowerShellHostVersion = '7.2'
 
 # Minimum version of Microsoft .NET Framework required by this module. This prerequisite is valid for the PowerShell Desktop edition only.
 # DotNetFrameworkVersion = ''
