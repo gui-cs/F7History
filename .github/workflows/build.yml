@@ -19,8 +19,7 @@ jobs:
       shell: pwsh
       run: |
             dotnet tool install --global PowerShell
-            $content = Get-Content -Path $env:GITHUB_PATH
-            $HOME + "/.dotnet/tools`r`n" + $content | Set-Content -Path $env:GITHUB_PATH -Encoding utf8
+            "$HOME/.dotnet/tools`r`n$(Get-Content -Path $env:GITHUB_PATH)" | Set-Content -Path $env:GITHUB_PATH -Encoding utf8
 
     - name: Checkout
       uses: actions/checkout@v3
