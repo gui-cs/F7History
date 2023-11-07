@@ -49,7 +49,9 @@ if ($localRepository) {
     if ($v -match "$ocgvModule.(.*?).nupkg") {
         $v = [Version]::new($Matches[1])
         "  $ocgvModule v$v found in local repository"
-    } 
+    } else {
+        throw "Can't find $ocgvModule in local repository at $localRepositoryPath. Did you build it?"
+    }
 } 
 
 if ($null -eq $ocgvVersion) {
