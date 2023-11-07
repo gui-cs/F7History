@@ -5,13 +5,13 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = '.\F7History.psm1'
+RootModule = 'F7History.psm1'
 
 # Version number of this module.
 ModuleVersion = '0.0.0'
 
 # Supported PSEditions
-# CompatiblePSEditions = @()
+CompatiblePSEditions = 'Core'
 
 # ID used to uniquely identify this module
 GUID = 'af35b6c1-758f-4d46-92ae-ac18cb9c983d'
@@ -32,7 +32,7 @@ Description = 'Press F7 to get a graphical Command History in Powershell.'
 # PowerShellVersion = ''
 
 # Name of the PowerShell host required by this module
-# PowerShellHostName = ''
+PowerShellHostName = '7.2'
 
 # Minimum version of the PowerShell host required by this module
 # PowerShellHostVersion = ''
