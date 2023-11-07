@@ -52,7 +52,15 @@ if ($localRepository) {
     } else {
         throw "Can't find $ocgvModule in local repository at $localRepositoryPath. Did you build it?"
     }
-} 
+
+    $v = Get-ChildItem "${localRepositoryPath}/PSReadLine*.nupkg" | Select-Object -ExpandProperty Name | Sort-Object -Descending | Select-Object -First 1
+    if ($v -match "PSReadLine.(.*?).nupkg") {
+        "  PSReadLine v$v found in local repository"
+    } else {
+        "  PSReadLine not found in local repository; publishing it there."
+        Publish-Module -Name PSReadLine -RequiredVersion (Get-Module PSReadline).Version -Repository local -Verbose:($PSBoundParameters['Verbose'] -eq $true) -ErrorAction Stop
+    }
+ } 
 
 if ($null -eq $ocgvVersion) {
     $module = (Find-Module $ocgvModule) | Select-Object -ExpandProperty Version | Sort-Object -Descending | Select-Object -First 1
