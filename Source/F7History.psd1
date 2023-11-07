@@ -96,7 +96,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = 'Windows','Mac','Linux','History','ConsoleGuiTools','TUI','Out-ConsoleGridView','ocgv','Terminal.Gui','gui.cs'
+        Tags = 'History','Windows','Mac','Linux','History','ConsoleGuiTools','TUI','Out-ConsoleGridView','ocgv','Terminal.Gui','gui.cs'
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/gui-cs/F7History/blob/main/LICENSE.md'
@@ -108,7 +108,7 @@ PrivateData = @{
         IconUri = 'https://gui-cs.github.io/Terminal.Gui/images/logo48.png'
 
         # ReleaseNotes of this module
-        # ReleaseNotes = ''
+        ReleaseNotes = 'https://github.com/gui-cs/F7History/releases'
 
         # Prerelease string of this module
         # Prerelease = ''
@@ -124,7 +124,7 @@ PrivateData = @{
  } # End of PrivateData hashtable
 
 # HelpInfo URI of this module
-HelpInfoURI = 'https://github.com/gui-cs/F7History/blob/main/README.md'
+HelpInfoURI = 'https://github.com/gui-cs/F7History'
 
 # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
 # DefaultCommandPrefix = ''

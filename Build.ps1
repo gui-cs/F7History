@@ -69,7 +69,7 @@ Update-ModuleManifest -RequiredModules @(
 
 if (-not $SkipScriptAnalyzer) {
     Write-Host "Invoke-ScriptAnalyzer with -Fixfor $PsdPath"
-    Invoke-ScriptAnalyzer $PsdPath -Recurse -Settings PSGallery -Fix -ErrorAction Stop
+    Invoke-ScriptAnalyzer $PsdPath -Settings PSGallery -Fix -ErrorAction Stop
 }
 
 $OldModule = Get-Module $ModuleName -ErrorAction SilentlyContinue
