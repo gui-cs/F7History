@@ -51,8 +51,10 @@ PowerShellVersion = '7.2'
 # ProcessorArchitecture = ''
 
 # Modules that must be imported into the global environment prior to importing this module
-RequiredModules = @(@{ModuleName = 'PSReadline'; ModuleVersion = '2.1'; },
-               @{ModuleName = 'Microsoft.PowerShell.ConsoleGuiTools'; ModuleVersion = '0.7.6.0'; })
+RequiredModules = @(
+    'PSReadLine'
+    'Microsoft.PowerShell.ConsoleGuiTools'
+)
 
 # Assemblies that must be loaded prior to importing this module
 # RequiredAssemblies = @()
