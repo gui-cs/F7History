@@ -2,7 +2,7 @@
   <tbody style="border: 0px">
     <tr style="border: 0px">
       <td rowspan="2" style="border: 0px">
-        <img src="https://gui-cs.github.io/Terminal.Gui/images/F7HistoryIcon.png"
+        <img src="https://gui-cs.github.io/F7History/F7HistoryIcon.png"
           alt="F7 History Icon"
           width="120px"/>
       </td>
@@ -17,7 +17,7 @@
   </tbody>
 </table>
 
-![Demo](https://gui-cs.github.io/Terminal.Gui/images/F7History.gif)
+![Demo](https://gui-cs.github.io/F7History/F7History.gif)
 
 ## Setup
 
