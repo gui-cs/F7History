@@ -9,15 +9,15 @@
       <td>
         <span style="vertical-align:top;font-size: 1.5em;">F7History - Graphical Command History for PowerShell.</span>
         <br/>
-        <span style="font-size: 1em">A PowerShell module that provides a graphical Command History activated by the `F7` and `Shift-F7` keys.</span>
+        <span style="font-size: 1em">A PowerShell module providing a graphical Command History activated by the `F7` and `Shift-F7` keys.</span>
+        <br/>
+        <span style="font-size: .7em">Built with [Terminal.Gui](github.com/gui-cs/Terminal.Gui) by [Tig](https://github.com/tig)</span>
       </td>
     </tr>
   </tbody>
 </table>
 
 ![Demo](https://gui-cs.github.io/Terminal.Gui/images/F7History.gif)
-
-Built with [Terminal.Gui](github.com/gui-cs/Terminal.Gui) by [Tig](https://github.com/tig)
 
 ## Setup
 
