@@ -1,6 +1,6 @@
-<table>
-  <tbody>
-    <tr>
+<table >
+  <tbody style="border: 0px">
+    <tr style="border: 0px">
       <td rowspan="2" style="border: 0px">
         <img src="https://gui-cs.github.io/Terminal.Gui/images/F7HistoryIcon.png"
           alt="F7 History Icon"
