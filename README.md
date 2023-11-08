@@ -21,23 +21,19 @@
 
 ## Setup
 
-Install `F7History` from the [PowerShell Gallery](https://www.powershellgallery.com/packages/F7History/).
+1. At a PowerShell prompt, use `Install-Module` to install `F7History` from the [PowerShell Gallery](https://www.powershellgallery.com/packages/F7History/):
 
 ```ps1
 Install-Module -Name "F7History"
 ```
 
-Add a line to import `F7History` in your PowerShell `$profile`:
+2. Import the module using `Import-Module`; adding this command to your PowerShell `$profile` will ensure the `F7History` is always available.
 
 ```ps1
 Import-Module -Name "F7History"
 ```
 
-To change the key bindings, use the `-ArgumentList` parameter when importing the module. For example, to use `F6` and `Shift-F6` instead of `F7` and `Shift-F7`:
-
-```ps1
-Import-Module -Name "F7History" -ArgumentList  @{Key = "F6"; AllKey = "Shift-F6"}
-```
+3. Press `F7` or `Shift-F7` to invoke.
 
 ## Usage 
 
@@ -53,6 +49,14 @@ When the `Command Line History` window is displayed:
 * Use the arrow keys or mouse to select an item.
 * Use `ENTER` to insert the selected item on the command line.
 * Use `ESC` to close the window without inserting anything on the command line.
+
+## Configuration
+
+To change the key bindings, use the `-ArgumentList` parameter when importing the module. For example, to use `F6` and `Shift-F6` instead of `F7` and `Shift-F7`:
+
+```ps1
+Import-Module -Name "F7History" -ArgumentList  @{Key = "F6"; AllKey = "Shift-F6"}
+```
 
 ### Forcing F7History to use NetDriver
 
@@ -70,3 +74,9 @@ To enable diagnostics information, set the `$F7EnableDiagnostics` variable to `$
 
 * [PSReadLine](https://www.powershellgallery.com/packages/PSReadLine)
 * [Out-ConsoleGridView](https://www.powershellgallery.com/packages/Microsoft.PowerShell.ConsoleGuiTools)
+
+## More Information
+
+* [F7History on Github](https://github.com/gui-cs/F7History)
+* [Terminal.Gui](https://github.com/gui-cs/Terminal.Gui)
+* [Out-ConsoleGridView on GitHub](https://github.com/PowerShell/GraphicalTools)
