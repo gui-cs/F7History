@@ -1,20 +1,23 @@
-![PowerShell Gallery Version (including pre-releases)](https://img.shields.io/powershellgallery/v/F7History)
-![PowerShell Gallery](https://img.shields.io/powershellgallery/dt/F7History)
-![PowerShell Gallery](https://img.shields.io/powershellgallery/p/F7History)
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-
-<div align="center">
-  <img src="https://gui-cs.github.io/Terminal.Gui/images/F7HistoryIcon.png"
-       alt="F7 History Icon"
-       width="100px"
-  />
-</div>
-
-## F7History - Graphical Command History for PowerShell
-
-A PowerShell module that provides a graphical Command History activated by the `F7` and `Shift-F7` keys.
+<table>
+  <tbody>
+    <tr>
+      <td rowspan="2">
+        <img src="https://gui-cs.github.io/Terminal.Gui/images/F7HistoryIcon.png"
+          alt="F7 History Icon"
+          width="120px"/>
+      </td>
+      <td>
+        <span style="vertical-align:top;font-size: 1.5em;">F7History - Graphical Command History for PowerShell.</span>
+        <br/>
+        <span style="font-size: 1em">A PowerShell module that provides a graphical Command History activated by the `F7` and `Shift-F7` keys.</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ![Demo](https://gui-cs.github.io/Terminal.Gui/images/F7History.gif)
+
+Built with [Terminal.Gui](github.com/gui-cs/Terminal.Gui) by [Tig](https://github.com/tig)
 
 ## Setup
 
@@ -63,13 +66,7 @@ To enable diagnostics information, set the `$F7EnableDiagnostics` variable to `$
 
 ## Dependencies
 
-This module is dependent on these modules which will automatically be installed if they are not already present:
+`F7History` is dependent on these modules which will automatically be installed if they are not already present:
 
-* [PSReadLine](https://github.com/PowerShell/PSReadLine)
-* [Out-ConsoleGridView](https://github.com/PowerShell/GraphicalTools)
-
-## Contributors ✨
-
-* [Tig](https://github.com/tig)
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+* [PSReadLine](https://www.powershellgallery.com/packages/PSReadLine)
+* [Out-ConsoleGridView](https://www.powershellgallery.com/packages/Microsoft.PowerShell.ConsoleGuiTools)
