@@ -4,7 +4,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 
 <div align="center">
-  <img src="icon.png"
+  <img src="https://gui-cs.github.io/Terminal.Gui/images/F7HistoryIcon.png"
        alt="F7 History Icon"
        width="100px"
   />
@@ -14,7 +14,7 @@
 
 A PowerShell module that provides a graphical Command History activated by the `F7` and `Shift-F7` keys.
 
-![Demo](https://i.imgur.com/GvX7LEL.gif)
+![Demo](https://gui-cs.github.io/Terminal.Gui/images/F7History.gif)
 
 ## Setup
 
