@@ -1,17 +1,17 @@
 <table>
   <tbody>
     <tr>
-      <td rowspan="2">
+      <td rowspan="2" style="border: 0px">
         <img src="https://gui-cs.github.io/Terminal.Gui/images/F7HistoryIcon.png"
           alt="F7 History Icon"
           width="120px"/>
       </td>
-      <td>
+      <td style="border: 0px">
         <span style="vertical-align:top;font-size: 1.5em;">F7History - Graphical Command History for PowerShell.</span>
         <br/>
         <span style="font-size: 1em">A PowerShell module providing a graphical Command History activated by the `F7` and `Shift-F7` keys.</span>
         <br/>
-        <span style="font-size: .7em">Built with [Terminal.Gui](github.com/gui-cs/Terminal.Gui) by [Tig](https://github.com/tig)</span>
+        <span style="font-size: .8em">Built with <a href="https://github.com/gui-cs/Terminal.Gui">Terminal.Gui</a> and <a href="https://github.com/PowerShell/GraphicalTools">Terminal.Gui</a> by <a href="https://github.com/tig">Tig</a>.</span>
       </td>
     </tr>
   </tbody>
