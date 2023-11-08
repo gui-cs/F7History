@@ -11,7 +11,7 @@
         <br/>
         <span style="font-size: 1em">A PowerShell module providing a graphical Command History activated by the `F7` and `Shift-F7` keys.</span>
         <br/>
-        <span style="font-size: .8em">Built with <a href="https://github.com/gui-cs/Terminal.Gui">Terminal.Gui</a> and <a href="https://github.com/PowerShell/GraphicalTools">Terminal.Gui</a> by <a href="https://github.com/tig">Tig</a>.</span>
+        <span style="font-size: .8em">Built with <a href="https://github.com/gui-cs/Terminal.Gui">Terminal.Gui</a> and <a href="https://github.com/PowerShell/GraphicalTools">Out-ConsoleGridView</a> by <a href="https://github.com/tig">Tig</a>.</span>
       </td>
     </tr>
   </tbody>
